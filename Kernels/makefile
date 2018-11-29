@@ -1,4 +1,3 @@
-# note asm is an objdump output!
 PREFIX = freescale-coldfire-2011.09/bin/m68k-linux-gnu-
 
 AS = $(PREFIX)as
@@ -18,7 +17,7 @@ all: micro-kernel.o micro-kernel.bin
 
 %.bin: %.o
 	$(LD)  $(LDFLAGS) $< -o $@
-	$(OBJDUMP) $(DUMPFLAGS) $@
+	$(OBJDUMP) $(DUMPFLAGS) $@ > $@.disassembly
 
 clean:
-	rm -f *.bin *.o *.asm
+	rm -f *.bin *.o *.disassembly
