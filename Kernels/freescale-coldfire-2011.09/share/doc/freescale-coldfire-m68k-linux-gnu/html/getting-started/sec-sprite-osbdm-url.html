@@ -1,0 +1,17 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"><title>5.7. Open Source BDM Devices</title><link rel="stylesheet" href="cs.css" type="text/css"><meta name="generator" content="DocBook XSL Stylesheets V1.74.0"><link rel="home" href="index.html" title="Sourcery CodeBench Lite"><link rel="up" href="sprite.html" title="Chapter 5. Sourcery CodeBench Debug Sprite"><link rel="prev" href="sec-sprite-tblcf-url.html" title="5.6. Turbo BDM Light ColdFire Devices"><link rel="next" href="ch05s08.html" title="5.8. Debugging a Remote Board"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">5.7. Open Source BDM Devices</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="sec-sprite-tblcf-url.html">Prev</a> </td><th width="60%" align="center">Chapter 5. Sourcery CodeBench Debug Sprite</th><td width="20%" align="right"> <a accesskey="n" href="ch05s08.html">Next</a></td></tr></table><hr></div><div class="section" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="sec-sprite-osbdm-url"></a>5.7. Open Source BDM Devices</h2></div></div></div><p>Open Source BDM (OSBDM) devices are supported.
+    The OSBDM device type partitions the
+  <em class="replaceable"><code>device-url</code></em> as follows:
+
+  </p><pre class="screen">osbdm:[//<em class="replaceable"><code>number</code></em>/]</pre><p>
+
+  The <em class="replaceable"><code>number</code></em> indicates the number of the OSBDM
+  interface to connect to, counting from zero upwards.  If the number is
+  omitted, the default is to connect to the zeroth interface, which works
+  well if you have only one OSBDM device connected to your computer.</p><p>There are no further options for the OSBDM device.</p><p>If you are connecting via OSBDM from Windows, 
+  you may see a message like:
+
+</p><pre class="screen">m68k-linux-gnu-sprite:error: Cannot load OSBDM library 'OSBDM-JM60.DLL'</pre><p>
+
+  If this happens, you must install the driver for the OSBDM device.
+  You can obtain the driver from the vendor of your OSBDM device.</p><p>As of this writing, there is not yet an OSBDM driver available for
+    Linux hosts.</p></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="sec-sprite-tblcf-url.html">Prev</a> </td><td width="20%" align="center"><a accesskey="u" href="sprite.html">Up</a></td><td width="40%" align="right"> <a accesskey="n" href="ch05s08.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top">5.6. Turbo BDM Light ColdFire Devices </td><td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td><td width="40%" align="right" valign="top"> 5.8. Debugging a Remote Board</td></tr></table></div></body></html>

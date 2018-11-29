@@ -1,0 +1,113 @@
+<?xml version="1.0"?>
+<!DOCTYPE board SYSTEM "board.dtd">
+<!-- Description for Freescale M54455EVB (Intel flash at CS0)
+
+     Version: Sourcery CodeBench Lite 2011.09-22
+     Support: https://support.codesourcery.com/GNUToolchain/
+
+     Copyright (c) 2007, 2008, 2009, 2010 CodeSourcery, Inc.
+
+     THIS FILE CONTAINS PROPRIETARY, CONFIDENTIAL, AND TRADE SECRET
+     INFORMATION OF CODESOURCERY AND/OR ITS LICENSORS.
+
+     You may not use or distribute this file without the express written
+     permission of CodeSourcery or its authorized distributor.  This file is
+     licensed only for use with Sourcery CodeBench.  No other use is permitted.
+     -->
+<board>
+  <properties>
+    <description>
+      Board:	Freescale M54455EVB (Intel flash at CS0)
+CPU:	54455
+    </description>
+    <property name="core">
+      v4
+    </property>
+    <property name="cache"/>
+  </properties>
+  <initialize>
+    <write-register address="RAMBAR1" value="0x80000221"/>
+
+    <!-- Init CS0 - 16MB ROM -->
+    <write-memory address="0xFC008000" value="0x00000000"/>
+    <write-memory address="0xFC008008" value="0x00000D60"/>
+    <write-memory address="0xFC008004" value="0x00FF0001"/>
+
+    <!-- Init CS1 - bootrom -->
+    <write-memory address="0xFC00800C" value="0x04000000"/>
+    <write-memory address="0xFC008014" value="0x00001140"/>
+    <write-memory address="0xFC008010" value="0x00070001"/>
+
+    <!-- Init CS2 - CPLD @;0x0800_0000 -->
+    <write-memory address="0xFC008018" value="0x08000000"/>
+    <write-memory address="0xFC008020" value="0x003F1140"/>
+    <write-memory address="0xFC00801C" value="0x00070001"/>
+
+    <!-- Init CS3 - FPGA @;0x0900_0000 -->
+    <write-memory address="0xFC008024" value="0x09000000"/>
+    <write-memory address="0xFC00802C" value="0x00000020"/>
+    <write-memory address="0xFC008028" value="0x00070001"/>
+
+    <!-- SDRAM Initialization for 200MHz -->
+    <delay time="100ms"/>
+    <!-- MSCR_SDRAM -->
+    <write-memory address="0xFC0A4074" value="0xAA" bits="8"/>
+    <!-- SDCS0 -->
+    <write-memory address="0xFC0B8110" value="0x4000001a"/>
+    <!-- SDCS1 -->
+    <write-memory address="0xFC0B8114" value="0x4800001A"/>
+    <!-- SDCFG1 -->
+    <write-memory address="0xFC0B8008" value="0x65311610"/>
+    <!-- SDCFG2 -->
+    <write-memory address="0xFC0B800C" value="0x59670000"/>
+    <!-- SDCR, issue PALL -->
+    <write-memory address="0xFC0B8004" value="0xEA0B2002"/>
+    <!-- SDMR, write ext mode reg -->
+    <write-memory address="0xFC0B8000" value="0x40010408"/>
+    <!-- SDMR, write mode reg -->
+    <write-memory address="0xFC0B8000" value="0x00010333"/>
+    <delay time="100ms"/>
+    <!-- SDCR, issue PALL -->
+    <write-memory address="0xFC0B8004" value="0xEA0B2002"/>
+    <!-- SDCR, refresh -->
+    <write-memory address="0xFC0B8004" value="0xEA0B2004"/>
+    <!-- SDCR, refresh -->
+    <write-memory address="0xFC0B8004" value="0xEA0B2004"/>
+    <!-- SDMR, clear DLL reset -->
+    <write-memory address="0xFC0B8000" value="0x00010233"/>
+    <write-memory address="0xFC0B8004" value="0x6A0B2000"/>
+    <!-- SDCR, clear mode_en -->
+    <write-memory address="0xFC0B8004" value="0x7A0B2C00"/>
+    <!-- set ref_en & dqs_oe -->
+    <delay time="10ms"/>
+
+    <!-- There is an unresolved bug with enabling icache -->
+
+    <!-- Write through icache, so trampolines can work -->
+    <write-register address="CACR" value="0x810c0100"/>
+    <write-register address="ACR0" value="0x1000c040"/>
+  </initialize>
+  <memory-map>
+    <memory-device address="0x40000000" size="256M" type="ram">
+      <description>
+	256MBytes DDR SDRAM
+      </description>
+    </memory-device>
+    <memory-device address="0x80000000" size="32K" type="ram">
+      <description>
+	32KBytes Internal SRAM
+      </description>
+    </memory-device>
+    <memory-device address="0x00000000" size="16M" type="flash" device="cfi">
+      <description>
+	16MBytes External Flash
+      </description>
+    </memory-device>
+    <memory-device address="0x04000000" size="512K" type="rom">
+      <description>
+	512KBytes External Flash
+      </description>
+    </memory-device>
+  </memory-map>
+</board>
+<!-- checksum: 47094a2e4494e277526c0c2247 -->

@@ -1,0 +1,74 @@
+<html lang="en">
+<head>
+<title>OMP_STACKSIZE - GNU libgomp</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name="description" content="GNU libgomp">
+<meta name="generator" content="makeinfo 4.13">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="Environment-Variables.html#Environment-Variables" title="Environment Variables">
+<link rel="prev" href="OMP_005fNUM_005fTHREADS.html#OMP_005fNUM_005fTHREADS" title="OMP_NUM_THREADS">
+<link rel="next" href="OMP_005fSCHEDULE.html#OMP_005fSCHEDULE" title="OMP_SCHEDULE">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
+<!--
+Copyright (C) 2006, 2007, 2008, 2010, 2011 Free Software Foundation, Inc.
+
+Permission is granted to copy, distribute and/or modify this document
+under the terms of the GNU Free Documentation License, Version 1.3 or
+any later version published by the Free Software Foundation; with the
+Invariant Sections being ``Funding Free Software'', the Front-Cover
+texts being (a) (see below), and with the Back-Cover Texts being (b)
+(see below).  A copy of the license is included in the section entitled
+``GNU Free Documentation License''.
+
+(a) The FSF's Front-Cover Text is:
+
+     A GNU Manual
+
+(b) The FSF's Back-Cover Text is:
+
+     You have freedom to copy and modify this GNU Manual, like GNU
+     software.  Copies published by the Free Software Foundation raise
+     funds for GNU development.-->
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+  span.sc    { font-variant:small-caps }
+  span.roman { font-family:serif; font-weight:normal; } 
+  span.sansserif { font-family:sans-serif; font-weight:normal; } 
+--></style>
+<link rel="stylesheet" type="text/css" href="../cs.css">
+</head>
+<body>
+<div class="node">
+<a name="OMP_STACKSIZE"></a>
+<a name="OMP_005fSTACKSIZE"></a>
+<p>
+Next:&nbsp;<a rel="next" accesskey="n" href="OMP_005fSCHEDULE.html#OMP_005fSCHEDULE">OMP_SCHEDULE</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="OMP_005fNUM_005fTHREADS.html#OMP_005fNUM_005fTHREADS">OMP_NUM_THREADS</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Environment-Variables.html#Environment-Variables">Environment Variables</a>
+<hr>
+</div>
+
+<h3 class="section">3.6 <samp><span class="env">OMP_STACKSIZE</span></samp> &ndash; Set default thread stack size</h3>
+
+<p><a name="index-Environment-Variable-10"></a>
+     <dl>
+<dt><em>Description</em>:<dd>Set the default thread stack size in kilobytes, unless the number
+is suffixed by <code>B</code>, <code>K</code>, <code>M</code> or <code>G</code>, in which
+case the size is, respectively, in bytes, kilobytes, megabytes
+or gigabytes. This is different from <code>pthread_attr_setstacksize</code>
+which gets the number of bytes as an argument. If the stacksize cannot
+be set due to system constraints, an error is reported and the initial
+stacksize is left unchanged. If undefined, the stack size is system
+dependent.
+
+     <br><dt><em>Reference</em>:<dd><a href="http://www.openmp.org/">OpenMP specifications v3.0</a>, sections 4.5
+</dl>
+
+   </body></html>
+

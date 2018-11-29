@@ -1,0 +1,11 @@
+# This file contains ID->name mappings for the linux hotplugging scripts.
+#
+# On Redhat systems, you should prepend the contents of this file to
+# /etc/hotplug/usb.usermap
+#
+# On Mandrake systems, copy it to /usr/lib/hotplug/usbtap/usb.usermap, make
+# sure it is readable by root, but *not* be executable, then run
+# update-usb.usermap.
+
+# Freescale CodeWarrior USB TAP
+usbtap             0x0003      0x15A2   0x50B3    0x0000       0x0000       0x00         0x00            0x00            0x00            0x00               0x00               0x00000000

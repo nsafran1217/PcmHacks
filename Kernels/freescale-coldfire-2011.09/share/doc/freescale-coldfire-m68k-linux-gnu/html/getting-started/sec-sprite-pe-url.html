@@ -1,0 +1,90 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"><title>5.4. P&amp;E Devices</title><link rel="stylesheet" href="cs.css" type="text/css"><meta name="generator" content="DocBook XSL Stylesheets V1.74.0"><link rel="home" href="index.html" title="Sourcery CodeBench Lite"><link rel="up" href="sprite.html" title="Chapter 5. Sourcery CodeBench Debug Sprite"><link rel="prev" href="sec-sprite-options.html" title="5.3. Sourcery CodeBench Debug Sprite Options"><link rel="next" href="sec-sprite-ccs-url.html" title="5.5. Command Converter Server Devices"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">5.4. P&amp;E Devices</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="sec-sprite-options.html">Prev</a> </td><th width="60%" align="center">Chapter 5. Sourcery CodeBench Debug Sprite</th><td width="20%" align="right"> <a accesskey="n" href="sec-sprite-ccs-url.html">Next</a></td></tr></table><hr></div><div class="section" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="sec-sprite-pe-url"></a>5.4. P&amp;E Devices</h2></div></div></div><p>P&amp;E debug devices are supported.  The P&amp;E device
+  partitions the <em class="replaceable"><code>device-url</code></em> as follows:
+
+  </p><pre class="screen">pe:[//<em class="replaceable"><code>type</code></em>[:<em class="replaceable"><code>number</code></em>]][/<em class="replaceable"><code>key</code></em>][?<em class="replaceable"><code>device-options</code></em>]</pre><p>
+
+  The various parts are:
+
+  </p><div class="variablelist"><dl><dt><span class="term"><em class="replaceable"><code>type</code></em></span></dt><dd><p>
+    Specify the debug device type.  The following debug device types
+    are supported
+    </p><div class="itemizedlist"><ul type="disc"><li><code class="literal">USBMultilink</code></li><li><code class="literal">CycloneProMaxUSB</code></li><li><code class="literal">CycloneProMaxSerial</code></li><li><code class="literal">CycloneProMaxEthernet</code></li><li><code class="literal">ParallelPortCable</code></li><li><code class="literal">PCIBDMLightning</code></li></ul></div><p>
+    </p></dd><dt><span class="term"><em class="replaceable"><code>number</code></em></span></dt><dd><p>
+    Specify the debug device number.  Be aware that a device's
+    number depends on whether other devices are concurrently
+    accessed (this is a feature of the underlying P&amp;E library).
+    </p></dd><dt><span class="term"><em class="replaceable"><code>key</code></em></span></dt><dd><p>
+    Some P&amp;E devices report unique device keys.  This option allows
+    you to select a device by its key, independently of
+    USB device numbering.</p></dd></dl></div><p>
+  </p><p>Not all the separate parts of the
+  <em class="replaceable"><code>device-url</code></em> are required to uniquely
+  define a particular device.  If you specify more than required,
+  the URL must be self-consistent.  If you specify fewer components
+  than required, the Sprite uses the first P&amp;E device found
+  that satisfies the specified components.</p><p>The <em class="replaceable"><code>key</code></em> is the most robust
+  mechanism for specifying a device, as it uses the unique ID of a
+  particular P&amp;E device.  It is immune from renumbering
+  issues, should boards be unplugged or inserted.</p><p>
+  The following <em class="replaceable"><code>device-options</code></em> are permitted:
+
+  </p><div class="variablelist"><dl><dt><span class="term"><code class="option">speed=<em class="replaceable"><code>speed</code></em></code></span></dt><dd><p>Specify the speed of the connection.  This is a clock
+  divider value, so higher values are slower connection speeds.
+  Refer to the P&amp;E documentation for valid speed settings for
+  your board.</p></dd><dt><span class="term"><code class="option">memory-timeout=<em class="replaceable"><code>timeout</code></em></code></span></dt><dd><p> Some boards report memory errors for every access within a
+  certain time of a genuine memory error.  This option instructs the
+  Sprite to compensate for this and retry a memory access that
+  reports an error within the specified time of a prior error.  If
+  you need to use this option you need to increase GDB's protocol
+  timeout by specifying 
+  <code class="literal">set remotetimeout <em class="replaceable"><code>N</code></em></code> 
+  at the GDB prompt.</p></dd><dt><span class="term"><code class="option">debug=<em class="replaceable"><code>file</code></em></code></span></dt><dd><p>Write P&amp;E debug information to <em class="replaceable"><code>file</code></em>.
+  </p></dd></dl></div><p>
+
+  </p><div class="section" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="id483286"></a>5.4.1. Connection Problems</h3></div></div></div><p>If you get a message 
+    &#8220;<span class="quote">Cannot load P&amp;E library 'UNIT_CFZ.DLL'</span>&#8221; or
+    &#8220;<span class="quote">Cannot load P&amp;E library 'libUnit_cfz.so'</span>&#8221;, 
+    you probably have not installed the
+    P&amp;E device software.  This software is included with
+    Sourcery CodeBench Lite; see <a class="xref" href="sec-sprite-pe-url.html#sec-sprite-pe-install" title="5.4.2. Installing P&amp;E Drivers">Section 5.4.2, &#8220;Installing P&amp;E Drivers&#8221;</a> for
+    installation instructions.</p><p>The message &#8220;<span class="quote">Cannot find a matching debug
+    device</span>&#8221; means that no P&amp;E device could be found
+    matching the <em class="replaceable"><code>device-url</code></em> that you
+    used.  Use the <code class="option">-i</code> option to enumerate the devices
+    available.</p><p>The message &#8220;<span class="quote">Cannot force background mode</span>&#8221;
+    can occur if you connect at too high a speed.  Try slowing the
+    connection by increasing the <code class="literal">speed=</code> option
+    in the device URL.</p></div><div class="section" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="sec-sprite-pe-install"></a>5.4.2. Installing P&amp;E Drivers</h3></div></div></div><p>
+      Drivers provided by P&amp;E Microcomputer Systems
+      are bundled with Sourcery CodeBench Lite for your convenience.
+      You must run the driver installer manually before
+      using your P&amp;E device.
+    </p><p>
+      To install or update the drivers on a Windows host, follow these steps:
+      </p><div class="orderedlist"><ol type="1"><li><p>
+            Complete the Sourcery CodeBench Lite installation.
+          </p></li><li><p>
+	    If you have previously used a P&amp;E device on your computer,
+            turn off your system and disconnect all P&amp;E devices.
+            Then reboot the system and use <code class="guilabel">Add/Remove
+            Software</code>, available through the Windows control
+	    panel, to check for and remove any previously-installed
+	    P&amp;E drivers.
+          </p></li><li><p>
+	    Run the P&amp;E driver installer executable located in the
+            <code class="filename">libexec/m68k-linux-gnu-post-install/sprite-drivers/</code>
+	    subdirectory of your Sourcery CodeBench Lite installation.
+          </p></li><li><p>
+            Turn off your system and connect all P&amp;E devices.
+          </p></li><li><p>
+            Reboot the system and start using Sourcery CodeBench Lite. 
+          </p></li></ol></div><p>
+    </p><p>On Linux, the P&amp;E driver is a loadable kernel module
+    that has to be compiled for your system.  You need kernel
+    headers and a native C compiler for your system.  The package is
+    provided as a <code class="filename">.tar.gz</code> file in the
+    <code class="filename">libexec/m68k-linux-gnu-post-install/sprite-drivers</code> 
+    subdirectory of your Sourcery CodeBench Lite installation.  You should unpack 
+    that file, and use the <code class="filename">setup.sh</code> script to 
+    build and install it.  You should manually remove all files of a 
+    previous install before building this module.</p></div></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="sec-sprite-options.html">Prev</a> </td><td width="20%" align="center"><a accesskey="u" href="sprite.html">Up</a></td><td width="40%" align="right"> <a accesskey="n" href="sec-sprite-ccs-url.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top">5.3. Sourcery CodeBench Debug Sprite Options </td><td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td><td width="40%" align="right" valign="top"> 5.5. Command Converter Server Devices</td></tr></table></div></body></html>

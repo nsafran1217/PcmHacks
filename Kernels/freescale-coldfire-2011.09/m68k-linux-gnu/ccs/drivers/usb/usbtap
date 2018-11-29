@@ -1,0 +1,48 @@
+#!/bin/bash
+
+# This script should be installed in /etc/hotplug/usb and be executable by root
+#
+# This script changes the permissions and ownership of a USB TAP device under
+# /proc/bus/usb to grant access to this device to everyone and ownership to
+# the first user that logged in.
+#
+# Ownership is set to $USER, where $USER is the first user that logged
+# in (through pam_console). If there is no user logged in to the console, the
+# ownership will go to the first non-root user with a login session.  If there
+# is no user user logged in at all, the ownership will get set to root.
+# Permissions are set to 0666.
+#
+# Arguments :
+# -----------
+# ACTION=[add|remove]
+# DEVICE=/proc/bus/usb/BBB/DDD
+# TYPE=usb
+
+if [ "$ACTION" = "add" -a "$TYPE" = "usb" ] && [ -f "${DEVICE}" ]; then
+  if [ -f /var/run/console.lock ]; then
+    USER=`cat /var/run/console.lock`
+  elif [ -f /var/run/console/console.lock ]; then
+    USER=`cat /var/run/console/console.lock`
+  elif [ -f /var/lock/console.lock ]; then
+    USER=`cat /var/lock/console.lock`
+  else
+  {
+    for lpid in `ps -e|grep login|awk '{print $1;}'`; do
+    {
+      USER=`ps -ef|grep $lpid|awk '{print $1;}'|grep -v root|head -n 1`
+      if [ -n $USER ];
+        then break;
+      fi
+    }
+    done
+  }
+  fi
+  # sanity check
+  if [ -z $USER ]; then
+    USER=root
+  fi
+  chown $USER "$DEVICE"
+  chmod 0666 "$DEVICE"
+  logger -it usbtap "Freescale CodeWarrior USB TAP attached and configured for use by $USER"
+fi
+

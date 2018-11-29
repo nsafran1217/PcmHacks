@@ -1,0 +1,140 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"><title>5.6. Turbo BDM Light ColdFire Devices</title><link rel="stylesheet" href="cs.css" type="text/css"><meta name="generator" content="DocBook XSL Stylesheets V1.74.0"><link rel="home" href="index.html" title="Sourcery CodeBench Lite"><link rel="up" href="sprite.html" title="Chapter 5. Sourcery CodeBench Debug Sprite"><link rel="prev" href="sec-sprite-ccs-url.html" title="5.5. Command Converter Server Devices"><link rel="next" href="sec-sprite-osbdm-url.html" title="5.7. Open Source BDM Devices"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">5.6. Turbo BDM Light ColdFire Devices</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="sec-sprite-ccs-url.html">Prev</a> </td><th width="60%" align="center">Chapter 5. Sourcery CodeBench Debug Sprite</th><td width="20%" align="right"> <a accesskey="n" href="sec-sprite-osbdm-url.html">Next</a></td></tr></table><hr></div><div class="section" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="sec-sprite-tblcf-url"></a>5.6. Turbo BDM Light ColdFire Devices</h2></div></div></div><p>Turbo BDM Light ColdFire (TBLCF) devices, such as the Axiom
+  AxBDM device, are supported.  The TBLCF device type partitions the
+  <em class="replaceable"><code>device-url</code></em> as follows:
+
+  </p><pre class="screen">tblcf:[//:<em class="replaceable"><code>number</code></em>/]</pre><p>
+
+  The <em class="replaceable"><code>number</code></em> indicates the number of the TBLCF
+  interface to connect to, counting from zero upwards.  If the number is
+  omitted, the default is to connect to the zeroth interface, which works
+  well if you have only one TBLCF device connected to your computer.</p><p>There are no further options for the TBLCF device.</p><p>If you are connecting via TBLCF from Windows, 
+  you may see a message like:
+
+</p><pre class="screen">m68k-linux-gnu-sprite:error: Couldn't load libusb DLL</pre><p>
+
+  If this happens, you must install the driver for the TBLCF device, 
+  included with Sourcery CodeBench Lite. 
+  See <a class="xref" href="sec-sprite-tblcf-url.html#sec-sprite-tblcf-install" title="5.6.1. Installing TBLCF (AxBDM) Windows Drivers">Section 5.6.1, &#8220;Installing TBLCF (AxBDM) Windows Drivers&#8221;</a> for installation
+  instructions.</p><p>If you are connecting via TBLCF from Linux, you may see a message like:
+
+</p><pre class="screen">m68k-linux-gnu-sprite:error: Error claiming interface \
+(-1, permission denied)</pre><p>
+
+  If you see this message, consult 
+  <a class="xref" href="sec-sprite-tblcf-url.html#sec-sprite-tblcf-linux-config" title="5.6.2. Configuring TBLCF (AxBDM) Devices on Linux">Section 5.6.2, &#8220;Configuring TBLCF (AxBDM) Devices on Linux&#8221;</a>
+  for configuration instructions.</p><div class="section" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="sec-sprite-tblcf-install"></a>5.6.1. Installing TBLCF (AxBDM) Windows Drivers</h3></div></div></div><p>
+      Before using a TBLCF device, you must install a driver.  To install
+      the TBLCF (AxBDM) driver on Windows, follow these steps:
+
+      </p><div class="orderedlist"><ol type="1"><li><p>
+            Complete the Sourcery CodeBench Lite installation.
+          </p></li><li><p>
+            Run the <code class="guilabel">Add Hardware</code> Control Panel.  Click
+	    <code class="guilabel">Yes, I have already connected the hardware</code>.
+          </p></li><li><p>
+            Select <code class="guilabel">Add a new hardware device</code>.
+          </p></li><li><p>
+            Select <code class="guilabel">Install the hardware that I manually select
+	    from a list</code>.
+          </p></li><li><p>
+            Select <code class="guilabel">Show all devices</code>.
+          </p></li><li><p>
+            Click <code class="guilabel">Have Disk</code>.  Browse to
+	    <code class="filename">libexec/m68k-linux-gnu-post-install/axbdm-drivers/axbdm.inf</code>,
+	    then select <code class="guilabel">AxBDM</code> from the list on the
+	    following pane.
+          </p></li><li><p>
+            You will get warnings about the driver not being signed by
+	    Microsoft. This is expected.
+          </p></li><li><p>
+            Reboot the system when prompted and start using Sourcery CodeBench Lite.
+          </p></li></ol></div><p>
+
+      Windows may auto-detect the TBLCF device when it is connected, and invoke
+      the driver installation dialog automatically.  If you have already
+      installed Sourcery CodeBench Lite, you may continue with the dialog using steps similar
+      to those outlined above.  Otherwise, close the dialog, install Sourcery CodeBench Lite
+      first, and then follow the above steps to install the driver.
+    </p></div><div class="section" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="sec-sprite-tblcf-linux-config"></a>5.6.2. Configuring TBLCF (AxBDM) Devices on Linux</h3></div></div></div><p>
+    The method you should use for configuring the TBLCF device on Linux depends
+    on whether your machine is using udev or hotplug to manage USB device
+    permissions. To determine which of these your distribution uses, find out
+    your kernel and udev version numbers as follows:
+    
+    </p><pre class="screen">&gt; uname -r
+<em class="replaceable"><code>2.6.20</code></em>
+&gt; udevinfo -V
+udevinfo, version <em class="replaceable"><code>108</code></em></pre><p>
+
+    A rule of thumb is that if your kernel version is less than 2.6.13
+    (<em class="replaceable"><code>2.6.20</code></em> in the example) or your udev version is
+    less than 059 (<em class="replaceable"><code>108</code></em> in the example), your machine
+    uses hotplug to control USB device permissions, else it uses udev. If this
+    rule of thumb doesn't work for you, consult your operating system vendor to
+    determine which method your distribution uses.
+    </p><p>
+    Performing the following steps allows any user to access the TBLCF device,
+    rather than just the superuser (root). Running the Debug Sprite as root is
+    technically possible, but is <span class="emphasis"><em>strongly</em></span> discouraged.
+    </p><div class="section" lang="en"><div class="titlepage"><div><div><h4 class="title"><a name="id484081"></a>5.6.2.1. Configuring TBLCF with udev</h4></div></div></div><p>
+      To configure udev to handle TBLCF permissions, first locate your udev
+      rule configuration directory (e.g.
+      <code class="filename">/etc/udev/rules.d/</code>). As root, create
+      a file in that directory called <code class="filename">25-tblcf.rules</code> with
+      the following contents:
+      
+      </p><pre class="screen">BUS=="usb", SYSFS{idVendor}=="0425", SYSFS{idProduct}=="1001", \
+MODE="0666"</pre><p>
+      
+      Note that this should be entered on one line, without the backslash.
+      Once this file is created, plug in the TBLCF device (if it is not already
+      plugged in) then reboot your machine to make sure your changes take
+      effect.
+      </p></div><div class="section" lang="en"><div class="titlepage"><div><div><h4 class="title"><a name="id484114"></a>5.6.2.2. Configuring TBLCF with hotplug</h4></div></div></div><p>
+      To configure hotplug to handle TBLCF permissions, you must create two
+      files in your hotplug USB configuration directory (e.g.
+      <code class="filename">/etc/hotplug/usb/</code>) as root. The first file is
+      named <code class="filename">tblcf</code> and contains:
+      </p><pre class="screen">#!/bin/bash
+# /etc/hotplug/usb/tblcf
+#
+if [ "${ACTION}" = "add" ] &amp;&amp; [ -f "${DEVICE}" ]
+then
+    case "$PRODUCT" in
+        425/1001/*)
+            chmod 0666 "${DEVICE}"
+            ;;
+    esac
+fi</pre><p>
+
+      The second file (in the same directory) is named
+      <code class="filename">tblcf.usermap</code> and contains:
+      
+      </p><pre class="screen">tblcf 0x0003 0x0425 0x1001 0x0000 0x0000 0x00 0x00 0x00 0x00 \
+0x00 0x00 0x00000000</pre><p>
+
+      Note that the above must be entered on one line, without the backslash.
+      Create these files and plug in your TBLCF device, if it is not already
+      plugged in. Reboot your machine to make sure your changes take effect.
+      </p></div><div class="section" lang="en"><div class="titlepage"><div><div><h4 class="title"><a name="sec-sprite-tblcf-troubleshooting"></a>5.6.2.3. Troubleshooting TBLCF Device Permissions</h4></div></div></div><p>
+      If you are having difficulties using the Debug Sprite as a non-root user,
+      check that your udev or hotplug configuration is working properly by
+      ensuring that the TBLCF device has the right file permissions. To do
+      this, first run the following command:
+
+      </p><pre class="screen">&gt; lsusb -d 0x0425:0x1001
+Bus 004 Device 002: ID 0425:1001 Motorola Semiconductors HK, Ltd</pre><p>
+
+      Note the bus and device number (<em class="replaceable"><code>004</code></em> and
+      <em class="replaceable"><code>002</code></em> above). Now, examine the permissions
+      of the corresponding device file as follows:
+
+      </p><pre class="screen">&gt; ls -l /proc/bus/usb/<em class="replaceable"><code>004</code></em>/<em class="replaceable"><code>002</code></em>
+-rw-rw-rw-  1 root root 50 2007-11-02 12:12 /proc/bus/usb/004/002</pre><p>
+
+      If the file has permissions as shown, you should be able run the Debug
+      Sprite as any user, and the problem lies elsewhere. If the permissions
+      are different, or there was no output from the <code class="command">lsusb</code>
+      command above, your configuration is not working properly. Ask
+      CodeSourcery for further guidance.
+      </p></div></div></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="sec-sprite-ccs-url.html">Prev</a> </td><td width="20%" align="center"><a accesskey="u" href="sprite.html">Up</a></td><td width="40%" align="right"> <a accesskey="n" href="sec-sprite-osbdm-url.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top">5.5. Command Converter Server Devices </td><td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td><td width="40%" align="right" valign="top"> 5.7. Open Source BDM Devices</td></tr></table></div></body></html>

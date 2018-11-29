@@ -1,0 +1,152 @@
+<?xml version="1.0"?>
+<!DOCTYPE board SYSTEM "board.dtd">
+<!-- Description for Freescale TWR-MCF5441x
+
+     Version: Sourcery CodeBench Lite 2011.09-22
+     Support: https://support.codesourcery.com/GNUToolchain/
+
+     Copyright (c) 2007, 2008, 2009, 2010 CodeSourcery, Inc.
+
+     THIS FILE CONTAINS PROPRIETARY, CONFIDENTIAL, AND TRADE SECRET
+     INFORMATION OF CODESOURCERY AND/OR ITS LICENSORS.
+
+     You may not use or distribute this file without the express written
+     permission of CodeSourcery or its authorized distributor.  This file is
+     licensed only for use with Sourcery CodeBench.  No other use is permitted.
+     -->
+<board>
+  <properties>
+    <description>
+      Board:	Freescale TWR-MCF5441x
+CPU:	54418
+    </description>
+    <property name="core">
+      v4
+    </property>
+    <property name="cache"/>
+  </properties>
+  <initialize>
+    <write-register address="RAMBAR1" value="0x80000221"/>
+
+    <!-- Init CS0 - 256MB ROM -->
+    <write-memory address="0xFC008000" value="0x00000000"/>
+    <write-memory address="0xFC008008" value="0x00007DA0"/>
+    <write-memory address="0xFC008004" value="0x0FFF0001"/>
+
+    <!-- SDRAM Initialization -->
+    <delay time="100ms"/>
+    <!-- MISCCR2: Select DDR 2x clock to PPL VCO -->
+    <write-memory address="0xEC09001A" value="0xE01D" bits="16"/>
+    <!-- PPMCR0: Enable clocks for DDR controller (at slot #46) -->
+    <write-memory address="0xFC04002D" value="46" bits="8"/>
+    <!-- MSCR_SDRAMC: MSC=Full strength 1.8V DDR2 -->
+    <write-memory address="0xEC094060" value="0x01" bits="8"/>
+    <delay time="100ms"/>
+    <!-- DDR_RCR: Disable RCR -->
+    <write-memory address="0xFC0B8180" value="0"/>
+    <!-- DDR_RCR: Force RCR software reset -->
+    <write-memory address="0xFC0B8180" value="0x40000000"/>
+    <!-- DDR_PADCR: PAD_ODT_CS=75ohm, OFFSET_VALUE=700mV/350mV, SPARE_DLY0 -->
+    <write-memory address="0xFC0B81AC" value="0x01030203"/>
+    <!-- DDR_CR00: WP0=lowest, RP0=lowest, ADDCOL, AGE -->
+    <write-memory address="0xFC0B8000" value="0x01010101"/>
+    <!-- DDR_CR01: WP1=lowest, RP1=lowest -->
+    <write-memory address="0xFC0B8004" value="0x00000101"/>
+    <!-- DDR_CR02: CCAPEN, BIGEND, BNKSPT -->
+    <write-memory address="0xFC0B8008" value="0x01010100"/>
+    <!-- DDR_CR03: DQSBEN=differential, DLLBYP -->
+    <write-memory address="0xFC0B800C" value="0x01010000"/>
+    <!-- DDR_CR04: QKREF, 8BNK, DRVDQS=drive -->
+    <write-memory address="0xFC0B8010" value="0x00010101"/>
+    <!-- DDR_CR06: ODTEN, TACEN -->
+    <write-memory address="0xFC0B8018" value="0x00010100"/>
+    <!-- DDR_CR07: PLEN -->
+    <write-memory address="0xFC0B801C" value="0x00000001"/>
+    <!-- DDR_CR08: REDUC=8-bit, PRIEN -->
+    <write-memory address="0XFC0B8020" value="0x01000001"/>
+    <!-- DDR_CR09: RWEN -->
+    <write-memory address="0xFC0B8024" value="0x00000100"/>
+    <!-- DDR_CR10: TREFEN, SWPEN -->
+    <write-memory address="0xFC0B8028" value="0x00010001"/>
+    <!-- DDR_CR11: P0TYP=1:2 -->
+    <write-memory address="0xFC0B802C" value="0x00000200"/>
+    <!-- DDR_CR12: CSMAP, P1TYP=1:2 -->
+    <write-memory address="0xFC0B8030" value="0x01000002"/>
+    <!-- DDR_CR14: ODTWRCS -->
+    <write-memory address="0xFC0B8038" value="0x00000100"/>
+    <!-- DDR_CR15: ADDPINS=2, ODTRES=75ohm -->
+    <write-memory address="0xFC0B803C" value="0x02000100"/>
+    <!-- DDR_CR16: COLSIZ=2, CASLAT=4, AGECNT=7 -->
+    <write-memory address="0xFC0B8040" value="0x02000407"/>
+    <!-- DDR_CR17: DFICTLDLY=2, CKEPW=3, CMDAGE=7 -->
+    <write-memory address="0xFC0B8044" value="0x02030007"/>
+    <!-- DDR_CR18: TRRD=2, DFICLKEN=1 -->
+    <write-memory address="0xFC0B8048" value="0x02000100"/>
+    <!-- DDR_CR19: APREBIT=10, WRLAT=3, TWTR=2, TRTP=3 -->
+    <write-memory address="0xFC0B804C" value="0x0A030203"/>
+    <!-- DDR_CR20: AREFINT=2, LATGATE=7, LATLIN=8 -->
+    <write-memory address="0xFC0B8050" value="0x00020708"/>
+    <!-- DDR_CR21: PHYRDLAT=5, TDAL=8 -->
+    <write-memory address="0xFC0B8054" value="0x00050008"/>
+    <!-- DDR_CR22: TRP=4, RDDATABASE=3, PHYWRLATBASE=2 -->
+    <write-memory address="0xFC0B8058" value="0x04030002"/>
+    <!-- DDR_CR23: TWR=4 -->
+    <write-memory address="0xFC0B805C" value="0x00000004"/>
+    <!-- DDR_CR24: TMRD=2, TFAW=10 -->
+    <write-memory address="0xFC0B8060" value="0x020A0000"/>
+    <!-- DDR_CR25: TRASMIN=12, TRC=14 -->
+    <write-memory address="0xFC0B8064" value="0x0C00000E"/>
+    <!-- DDR_CR26: TRFC=32, TRCD_INT=4 -->
+    <write-memory address="0xFC0B8068" value="0x00002004"/>
+    <!-- DDR_CR28: P0WRCNT=16, P0RDCNT=16 -->
+    <write-memory address="0xFC0B8070" value="0x00100010"/>
+    <!-- DDR_CR29: P1WRCNT=16, P1RDCNT=16 -->
+    <write-memory address="0xFC0B8074" value="0x00100010"/>
+    <!-- DDR_CR31: TREF=1945 -->
+    <write-memory address="0xFC0B807C" value="0x07990000"/>
+    <!-- DDR_CR41: TCPD=100 -->
+    <write-memory address="0xFC0B80A4" value="0x00000064"/>
+    <!-- DDR_CR42: TRASMAX=17490, TPDEX=2 -->
+    <write-memory address="0xFC0B80A8" value="0x44520002"/>
+    <!-- DDR_CR43: TXSR=200, TXSNR=35 -->
+    <write-memory address="0xFC0B80AC" value="0x00C80023"/>
+    <!-- DDR_CR45: TINIT=50000 -->
+    <write-memory address="0xFC0B80B4" value="0x0000C350"/>
+    <!-- DDR_CR56: DRAMCLASS=DDR2 -->
+    <write-memory address="0xFC0B80E0" value="0x04000000"/>
+    <!-- DDR_CR57: TMOD=3, WRLATADJ=3, RDLATADJ=4 -->
+    <write-memory address="0xFC0B80E4" value="0x03000304"/>
+    <!-- DDR_CR58: EMRS1D=0x4004 -->
+    <write-memory address="0xFC0B80E8" value="0x40040000"/>
+    <!-- DDR_CR59: EMRS3D=0xC000, EMRS1D_B=0x4004 -->
+    <write-memory address="0xFC0B80EC" value="0xC0004004"/>
+    <!-- DDR_CR60: MRSD=0x0642, EMRS3D_B=0xC000 -->
+    <write-memory address="0xFC0B80F0" value="0x0642C000"/>
+
+    <!-- DDR_CR09: START, RWEN -->
+    <write-memory address="0xFC0B8024" value="0x01000100"/>
+
+    <delay time="100ms"/>
+
+    <!-- Enable and invalidate caches -->
+    <write-register address="CACR" value="0x810c0100"/>
+  </initialize>
+  <memory-map>
+    <memory-device address="0x40000000" size="128M" type="ram">
+      <description>
+	128MBytes DDR SDRAM
+      </description>
+    </memory-device>
+    <memory-device address="0x80000000" size="64K" type="ram">
+      <description>
+	64KBytes Internal SRAM
+      </description>
+    </memory-device>
+    <memory-device address="0x00000000" size="256M" type="flash" device="nfc">
+      <description>
+	256MBytes External Flash
+      </description>
+    </memory-device>
+  </memory-map>
+</board>
+<!-- checksum: f3470d5484b2f08af293941b -->

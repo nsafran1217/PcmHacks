@@ -1,0 +1,24 @@
+CCS driver installation overview
+--------------------------------
+
+If the user has installed the CodeWarrior tools from a CodeWarrior 
+installation CD, then it is assumed that all the drivers for
+USB devices are installed properly.
+
+If the user needs to install any ccs device manually, then this document
+and the readme.txt files in each driver folder may be followed.
+
+The user needs to be logged on with root privileges for driver
+installation.  The drivers are located in the installed CodeWarrior directory,
+in the subdirectory ccs/drivers.
+
+Supported Operating Systems*:
+
+  Red Hat Linux 8.0, 9.0, Fedora Core 3, Fedora Core 4
+  Mandrake Linux 10.0, SuSE 10.1
+
+  * Limited testing has been performed on the distributions listed above.
+    In general, the devices should be usable on any distribution which uses
+    a 2.4 or 2.6 kernel, but CCS may need to be run as root if the
+    distribution's hotplug scripts differ significantly from the tested
+    distributions.

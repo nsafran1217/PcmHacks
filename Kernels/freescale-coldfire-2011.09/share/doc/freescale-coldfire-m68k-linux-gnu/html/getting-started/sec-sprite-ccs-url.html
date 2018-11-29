@@ -1,0 +1,110 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"><title>5.5. Command Converter Server Devices</title><link rel="stylesheet" href="cs.css" type="text/css"><meta name="generator" content="DocBook XSL Stylesheets V1.74.0"><link rel="home" href="index.html" title="Sourcery CodeBench Lite"><link rel="up" href="sprite.html" title="Chapter 5. Sourcery CodeBench Debug Sprite"><link rel="prev" href="sec-sprite-pe-url.html" title="5.4. P&amp;E Devices"><link rel="next" href="sec-sprite-tblcf-url.html" title="5.6. Turbo BDM Light ColdFire Devices"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">5.5. Command Converter Server Devices</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="sec-sprite-pe-url.html">Prev</a> </td><th width="60%" align="center">Chapter 5. Sourcery CodeBench Debug Sprite</th><td width="20%" align="right"> <a accesskey="n" href="sec-sprite-tblcf-url.html">Next</a></td></tr></table><hr></div><div class="section" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="sec-sprite-ccs-url"></a>5.5. Command Converter Server Devices</h2></div></div></div><p>The Sourcery CodeBench Debug Sprite supports devices such as the
+  CodeWarrior Ethernet TAP and USB TAP that are controlled by the
+  Command Converter Server (CCS) utility.  You need to start CCS
+  separately before connecting to the debug device from GDB; see
+  <a class="xref" href="sec-sprite-ccs-url.html#sec-sprite-ccs-start" title="5.5.1. Starting CCS">Section 5.5.1, &#8220;Starting CCS&#8221;</a>.
+  </p><p>The Sprite partitions the CCS <em class="replaceable"><code>device-url</code></em> 
+  as follows:
+
+  </p><pre class="screen">ccs:[//<em class="replaceable"><code>host</code></em>[:<em class="replaceable"><code>port</code></em>]][/<em class="replaceable"><code>chainpos</code></em>][?<em class="replaceable"><code>device-options</code></em>]</pre><p>
+
+  The <em class="replaceable"><code>host</code></em> and
+  <em class="replaceable"><code>port</code></em> indicate the location of the CCS
+  port to connect to.  The <em class="replaceable"><code>chainpos</code></em> (a number)
+  indicates where the ColdFire debug device is in the CCS chain.
+  </p><p>
+  The following <em class="replaceable"><code>device-options</code></em> are permitted:
+
+  </p><div class="variablelist"><dl><dt><span class="term"><code class="option">speed=<em class="replaceable"><code>speed</code></em></code></span></dt><dd><p> Specify the speed used to connect to the target.  This is
+  specified in KHz by default.  You can use <code class="literal">MHz</code>
+  and <code class="literal">KHz</code>
+  suffixes.</p></dd><dt><span class="term"><code class="option">timeout=<em class="replaceable"><code>timeout</code></em></code></span></dt><dd><p> This specifies the timeout, in seconds, used for
+  communication with the Command Converter
+  Server.</p></dd></dl></div><p>
+
+  </p><p>As an example, if CCS is listening on port
+  <code class="literal">localhost:41475</code>, connect GDB to the board with:
+
+</p><pre class="screen">(gdb) target remote | \
+  m68k-linux-gnu-sprite ccs://localhost:41475 m54455evb</pre><div class="section" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="sec-sprite-ccs-start"></a>5.5.1. Starting CCS</h3></div></div></div><p>CCS is included with Sourcery CodeBench Lite; you do not need to have the
+    CodeWarrior tools installed.  You can find the CCS executable in the
+    <code class="filename">m68k-linux-gnu/ccs/bin</code> subdirectory of your
+    Sourcery CodeBench Lite installation.
+    </p><p>The server can be started by clicking on the CCS icon, or
+    by entering <code class="command">ccs</code> on the command line.  You can
+    use the <code class="option">-nogfx</code> option to use its command-line
+    interface rather than having it create a GUI window.  
+    </p><p>Use the following commands to initialize the server:
+
+</p><pre class="screen">% delete all
+% config port <em class="replaceable"><code>port</code></em>
+% config cc <em class="replaceable"><code>device</code></em>
+% config client all</pre><p>
+
+    The <em class="replaceable"><code>port</code></em> number is the TCP/IP port
+    the server listens on, and is what you should use in the
+    Sprite's URI.  The <em class="replaceable"><code>device</code></em> indicates
+    what target device should be used.  For USB devices use
+    <code class="literal">utap</code> for COP/OnCE and
+    <code class="literal">utap_dpi</code> for BDM or DPI.  For Ethernet
+    devices use <code class="literal">powertap</code> for COP/OnCE and
+    <code class="literal">powertap_dpi</code> for BDM or DPI.  If you have
+    multiple devices of you can append a
+    :<em class="replaceable"><code>serial-number</code></em> to the USB
+    <em class="replaceable"><code>device</code></em> name.  The eight-digit
+    <em class="replaceable"><code>serial-number</code></em> is located on the
+    underside of the TAP device just after the revision
+    information. For Ethernet devices append the device's IP
+    address.</p><p>In summary, to connect to a COP/OnCE target using an
+    Ethernet TAP:
+
+</p><pre class="screen">% config cc powertap:<em class="replaceable"><code>1.2.3.4</code></em></pre><p>
+
+    To connect to a BDM or DPI target using an Ethernet TAP:
+
+</p><pre class="screen">% config cc powertap_dpi:<em class="replaceable"><code>1.2.3.4</code></em></pre><p>
+
+    To connect to a COP/OnCE target using a USB TAP:
+
+</p><pre class="screen">% config cc utap</pre><p>
+
+    To connect to a BDM or DPI target using a USB TAP:
+
+</p><pre class="screen">% config cc utap_dpi</pre><p>
+    </p><p> You can use the <code class="command">config save</code> command to
+    save the configuration for later use.  The <code class="command">show
+    cc</code> command shows you the current configuration.  The
+    <code class="command">show port</code> command shows you the port number
+    CCS is serving. </p></div><div class="section" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="id483732"></a>5.5.2. Common CCS Errors</h3></div></div></div><p>Here are some common error messages and their causes:
+
+    </p><div class="variablelist"><dl><dt><span class="term">Cable disconnected</span></dt><dd><p>The
+    target board is not powered up, the board hardware is faulty or
+    in a bad state or the jumper settings are
+    incorrect.</p></dd><dt><span class="term">CC not present</span></dt><dd><p>The
+    required Command Converter is not present.  You did not use
+    <code class="literal">utap_bdm</code> or <code class="literal">utap_dpi</code> to connect
+    CCS to a BDM or DPI TAP device
+    connection.</p></dd><dt><span class="term">Core not
+    responding</span></dt><dd><p>CCS is no longer has control of
+    the target system.  The board hardware is faulty or in a bad
+    state, the board initialization settings are incorrect or there
+    is another debugger configuration
+    problem.</p></dd><dt><span class="term">USB open failure </span></dt><dd><p>For
+    a Windows host, the USB driver on the host computer is hung.
+    Unplug/replug the USB tap, or reboot the host PC if the problem
+    persists.  This might also happen if the USB drivers were not
+    installed.  You may install USB drivers manually from
+    <code class="filename">m68k-linux-gnu\ccs\drivers</code> subdirectory of your
+    Sourcery CodeBench Lite installation.</p><p>For a Linux host this can occur if the permissions are not
+    set correctly.  Try running CCS as root, and if this resolves
+    the problem, review the instructions in
+    <code class="filename">m68k-linux-gnu/ccs/drivers/usb</code> subdirectory of
+    your Sourcery CodeBench Lite installation for setting up USB
+    permissions.</p></dd><dt><span class="term">Maximum number of Command Converters
+    reached</span></dt><dd><p>You have tried to reconfigure without
+    first deleting the current
+    configuration.</p></dd><dt><span class="term">Cannot reset to debug
+    mode</span></dt><dd><p>This can indicate that the clock
+    speed is too high.  Try a lower clock speed with the
+    <code class="literal">speed=</code> option in the device URL.
+    </p></dd></dl></div></div></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="sec-sprite-pe-url.html">Prev</a> </td><td width="20%" align="center"><a accesskey="u" href="sprite.html">Up</a></td><td width="40%" align="right"> <a accesskey="n" href="sec-sprite-tblcf-url.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top">5.4. P&amp;E Devices </td><td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td><td width="40%" align="right" valign="top"> 5.6. Turbo BDM Light ColdFire Devices</td></tr></table></div></body></html>

@@ -1,0 +1,2 @@
+BUS=="usb", SYSFS{idVendor}=="15a2", SYSFS{idProduct}=="50b3", SYMLINK+="usbtap%n", MODE:="0666"
+

@@ -1,0 +1,106 @@
+<?xml version="1.0"?>
+<!DOCTYPE board SYSTEM "board.dtd">
+<!-- Description for Freescale M5485EVB
+
+     Version: Sourcery CodeBench Lite 2011.09-22
+     Support: https://support.codesourcery.com/GNUToolchain/
+
+     Copyright (c) 2007, 2008, 2009, 2010 CodeSourcery, Inc.
+
+     THIS FILE CONTAINS PROPRIETARY, CONFIDENTIAL, AND TRADE SECRET
+     INFORMATION OF CODESOURCERY AND/OR ITS LICENSORS.
+
+     You may not use or distribute this file without the express written
+     permission of CodeSourcery or its authorized distributor.  This file is
+     licensed only for use with Sourcery CodeBench.  No other use is permitted.
+     -->
+<board>
+  <properties>
+    <description>
+      Board:	Freescale M5485EVB
+CPU:	5485
+    </description>
+    <property name="core">
+      v4e
+    </property>
+    <property name="cache"/>
+    <property name="floating-point"/>
+  </properties>
+  <initialize>
+    <write-register address="MBAR" value="0x10000000"/>
+    <write-register address="RAMBAR0" value="0x20000021"/>
+    <write-register address="RAMBAR1" value="0x20001021"/>
+    <!-- Init CS1 for rom -->
+    <write-memory address="0x1000050c" value="0x40000000"/>
+    <!-- CSCR1 16-bit port -->
+    <write-memory address="0x10000514" value="0x00101580"/>
+    <!-- CSMR1 -->
+    <write-memory address="0x10000510" value="0x00ff0001"/>
+    <!-- Init CS0 for boot rom -->
+    <write-memory address="0x10000500" value="0xfe000000"/>
+    <write-memory address="0x10000508" value="0x00001980"/>
+    <write-memory address="0x10000504" value="0x001f0001"/>
+    <!-- SDRAM Initialization -->
+    <!-- SDRAMDS -->
+    <write-memory address="0x10000004" value="0x000002aa"/>
+    <!-- SDRAM CS0 (64M) -->
+    <write-memory address="0x10000020" value="0x00000019"/>
+    <!-- SDRAM CS1 (unused) -->
+    <write-memory address="0x10000024" value="0x00000000"/>
+    <!-- SDCFG1 -->
+    <write-memory address="0x10000108" value="0x53722930"/>
+    <!-- SDCFG2 -->
+    <write-memory address="0x1000010c" value="0x24330000"/>
+    <!-- SDCR + IPALL -->
+    <write-memory address="0x10000104" value="0xe10f0002"/>
+    <!-- SDMR (write to LEMR) -->
+    <write-memory address="0x10000100" value="0x40010000"/>
+    <!-- SDRM (write to LMR) -->
+    <write-memory address="0x10000100" value="0x05890000"/>
+    <!-- SDCR + IPALL -->
+    <write-memory address="0x10000104" value="0xe10f0002"/>
+    <!-- SDCR + IREF (first refresh) -->
+    <write-memory address="0x10000104" value="0xe10f0004"/>
+    <!-- SDCR + IREF (second refresh) -->
+    <write-memory address="0x10000104" value="0xe10f0004"/>
+    <!-- SDMR (write to LMR) -->
+    <write-memory address="0x10000100" value="0x01890000"/>
+    <!-- SDCR (lock SDMR, enable refresh) -->
+    <write-memory address="0x10000104" value="0x710f0f00"/>
+    <delay time="100ms"/>
+
+    <!-- There is an unresolved bug with enabling icache -->
+
+    <!-- Write through icache, so trampolines can work -->
+    <write-register address="CACR" value="0x810c0100"/>
+    <write-register address="ACR0" value="0x1000c040"/>
+  </initialize>
+  <memory-map>
+    <memory-device address="0x00000000" size="64M" type="ram">
+      <description>
+	64 MBytes DDR SDRAM
+      </description>
+    </memory-device>
+    <memory-device address="0x20000000" size="4K" type="ram">
+      <description>
+	4 KBytes Internal SRAM
+      </description>
+    </memory-device>
+    <memory-device address="0x20001000" size="4K" type="ram">
+      <description>
+	4 KBytes Internal SRAM
+      </description>
+    </memory-device>
+    <memory-device address="0x40000000" size="16M" type="flash" device="cfi">
+      <description>
+	16 MBytes External StrataFlash, 16bit wide
+      </description>
+    </memory-device>
+    <memory-device address="0xfe000000" size="2M" type="flash" device="cfi">
+      <description>
+	2 MBytes External BootFlash, 16bit wide
+      </description>
+    </memory-device>
+  </memory-map>
+</board>
+<!-- checksum: 844843f609b1cf3d82243c7 -->

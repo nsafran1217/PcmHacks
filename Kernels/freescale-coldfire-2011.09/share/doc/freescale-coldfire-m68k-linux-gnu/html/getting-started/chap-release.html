@@ -1,0 +1,297 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"><title>Appendix A. Sourcery CodeBench Lite Release Notes</title><link rel="stylesheet" href="cs.css" type="text/css"><meta name="generator" content="DocBook XSL Stylesheets V1.74.0"><meta name="description" content=" This appendix contains information about changes in this release of Sourcery CodeBench Lite for ColdFire GNU/Linux. You should read through these notes to learn about new features and bug fixes."><link rel="home" href="index.html" title="Sourcery CodeBench Lite"><link rel="up" href="index.html" title="Sourcery CodeBench Lite"><link rel="prev" href="ch06s03.html" title="6.3. Manuals for GNU Toolchain Components"><link rel="next" href="chap-license.html" title="Appendix B. Sourcery CodeBench Lite Licenses"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">Appendix A. Sourcery CodeBench Lite Release Notes</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="ch06s03.html">Prev</a> </td><th width="60%" align="center"> </th><td width="20%" align="right"> <a accesskey="n" href="chap-license.html">Next</a></td></tr></table><hr></div><div class="appendix" lang="en"><div class="titlepage"><div><div><h2 class="title"><a name="chap-release"></a>Appendix A. Sourcery CodeBench Lite Release Notes</h2></div><div><div class="abstract"><p class="title"><b></b></p><p>
+     This appendix contains information about changes in this
+     release of Sourcery CodeBench Lite for ColdFire GNU/Linux.  You should read
+     through these notes to learn about new features and bug fixes.
+    </p></div></div></div></div><div class="toc"><p><b>Table of Contents</b></p><dl><dt><span class="section"><a href="chap-release.html#sec-release-notes">A.1. Changes in Sourcery CodeBench Lite for ColdFire GNU/Linux</a></span></dt></dl></div><div class="section" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="sec-release-notes"></a>A.1. Changes in Sourcery CodeBench Lite for ColdFire GNU/Linux</h2></div></div></div><p>
+      This section documents Sourcery CodeBench Lite changes for each released revision.
+    </p><div class="section" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="id485661"></a>A.1.1. Changes in Sourcery CodeBench Lite 2011.09-22</h3></div></div></div><p><b>Binutils version 2.21. </b>
+          Sourcery CodeBench Lite for ColdFire GNU/Linux is now based on binutils
+          version 2.21.
+        </p><p><b>
+          A crash in GDB <code class="command">maint print arch</code> has been fixed
+        . </b>
+          A bug in the GDB command <code class="command">maint print arch</code>
+          that sometimes caused GDB to crash has been fixed.
+        </p></div><div class="section" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="id485769"></a>A.1.2. Changes in Sourcery CodeBench Lite 2011.09-14</h3></div></div></div><p><b>New Sourcery CodeBench Lite branding. </b>
+          Sourcery G++ has been renamed to Sourcery CodeBench.
+	  <span>
+	    This change affects the names of the default installation
+	    directory and installer-created shortcuts, but no
+	    internal pathnames or tool names within the installation directory
+	    have been changed.
+	  </span>
+	  
+        </p><p><b>GCC version 4.6. </b>
+          Sourcery CodeBench Lite for ColdFire GNU/Linux is now based on GCC
+          version 4.6. For more information about changes from GCC
+          version 4.5 that was included in previous releases, see
+          <code class="uri">http://gcc.gnu.org/gcc-4.6/changes.html</code>.
+        </p><p><b>ColdFire comparison fix. </b>
+          A compiler bug that caused floating-point comparisons with zero
+          to be miscompiled in some circumstances has been fixed. This
+          only affected code using the hardware floating-point unit,
+          not soft-float code.
+        </p><p><b>Map file name demangling bug fix. </b>
+	  GCC now properly passes the 
+	  <code class="option">--demangle</code> and <code class="option">--no-demangle</code>
+	  options to the linker to control map file output.  The default
+	  behavior on all hosts is now to demangle C++ names.
+        </p><p><b>Assembler crash. </b>
+          The assembler now warns when there is line information for
+	  the <code class="literal">*ABS*</code> section, rather than crash.
+	  This can occur when the <code class="code">.offset</code> directive is
+	  used incorrectly.
+        </p><p><b>Linux kernel headers update. </b>
+          Linux kernel header files have been updated to version
+          2.6.39.
+        </p><p><b>Linux kernel headers update. </b>
+          Linux kernel header files have been updated to version
+          3.0.1.
+        </p><p><b>GDB interrupt handling bug fix. </b>
+	  A bug in GDB has been fixed that caused it to sometimes fail
+	  to interrupt lengthy single-step operations (as by a
+	  <span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>C</strong></span>
+	  when using GDB from the command line).
+	</p><p><b>Fix GDB crash during connection to debug agent. </b>
+          A bug has been fixed that caused GDB to crash while connecting
+	  to any debug agent through standard IO where the debug agent
+	  had detected an early error and terminated the communication.
+        </p><p><b>Improved disassembler performance in the debugger. </b>
+          GDB's disassembler has been improved to use more efficient memory
+	  access on remote targets.
+        </p><p><b>P&amp;E driver updates. </b>
+          The bundled P&amp;E drivers and libraries for both Windows and Linux
+	  hosts have been updated.
+	  The update to version 10 drivers fixes compatibility problems
+	  with the previously-distributed drivers on Windows 7 hosts.
+	  In addition, the P&amp;E support library has been updated to
+	  version 3.66-1002.
+	  Refer to <a class="xref" href="sec-sprite-pe-url.html#sec-sprite-pe-install" title="5.4.2. Installing P&amp;E Drivers">Section 5.4.2, &#8220;Installing P&amp;E Drivers&#8221;</a> for
+	  P&amp;E driver installation instructions; note that the install
+	  procedure on Windows hosts has changed from previous releases.
+        </p><p><b>Debug Sprite option defaults. </b>
+          The Sourcery CodeBench Debug Sprite now uses default option values
+	  specified in board configuration files.  Options included in
+	  the device URL override the default values.
+        </p><p><b>Changes to host operating system requirements. </b>
+          The minimum required Microsoft Windows OS needed to run
+          Sourcery CodeBench Lite is now Windows XP (SP1).
+        </p></div><div class="section" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="id486328"></a>A.1.3. Changes in Sourcery CodeBench Lite 2011.03-98</h3></div></div></div><p><b>New Sourcery CodeBench Lite branding. </b>
+          Sourcery G++ has been renamed to Sourcery CodeBench.
+	  <span>
+	    This change affects the names of the default installation
+	    directory and installer-created shortcuts, but no
+	    internal pathnames or tool names within the installation directory
+	    have been changed.
+	  </span>
+	  
+        </p><p><b>Interprocedural register optimization. </b>
+          The compiler has a new experimental optimization that generates
+          better code for functions that only call functions in the same
+          object.  To switch this optimization on, use
+          <code class="option">-fuse-caller-save</code>.
+        </p><p><b>Improved function call profiling. </b>
+          The compiler now supports
+          the <code class="option">-finstrument-function-calls</code> option.
+          Please see the GCC documentation for more details.
+        </p><p><b>Fix GDB crash during connection to debug agent. </b>
+          A bug has been fixed that caused GDB to crash while connecting
+	  to any debug agent through standard IO where the debug agent
+	  had detected an early error and terminated the communication.
+        </p><p><b>Improved disassembler performance in the debugger. </b>
+          GDB's disassembler has been improved to use more efficient memory
+	  access on remote targets.
+        </p><p><b>P&amp;E driver updates. </b>
+          The bundled P&amp;E drivers and libraries for both Windows and Linux
+	  hosts have been updated.
+	  The update to version 10 drivers fixes compatibility problems
+	  with the previously-distributed drivers on Windows 7 hosts.
+	  In addition, the P&amp;E support library has been updated to
+	  version 3.66-1002.
+	  Refer to <a class="xref" href="sec-sprite-pe-url.html#sec-sprite-pe-install" title="5.4.2. Installing P&amp;E Drivers">Section 5.4.2, &#8220;Installing P&amp;E Drivers&#8221;</a> for
+	  P&amp;E driver installation instructions; note that the install
+	  procedure on Windows hosts has changed from previous releases.
+        </p></div><div class="section" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="id486556"></a>A.1.4. Changes in Sourcery G++ Lite 2011.03-51</h3></div></div></div><p><b>C++ constructor bug fix. </b>
+          A compiler bug has been fixed that caused incorrect code for C++
+          constructors for some class hierarchies that use virtual inheritance
+          and include empty classes.  At runtime, the incorrect constructors
+          resulted in memory corruption or other errors.
+        </p><p><b>EGLIBC version 2.13. </b>
+          Sourcery G++ Lite for ColdFire GNU/Linux now includes EGLIBC version 2.13
+          library which is based on GNU C Library version 2.13.
+          For more information about changes, see
+          <code class="uri">http://www.eglibc.org/news#eglibc_2_13</code>.
+        </p></div><div class="section" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="id486659"></a>A.1.5. Changes in Sourcery G++ Lite 2011.03-17</h3></div></div></div><p><b>Compiler optimization improvements. </b>
+          The compiler has been enhanced with a number of optimization
+	  improvements, including:
+	  </p><div class="itemizedlist"><ul type="disc"><li>
+	      Smaller and faster code for compound conditionals.
+	    </li><li>
+	      Removal of superfluous sign and zero extensions.
+	    </li></ul></div><p>
+        </p><p><b>GCC version 4.5.2. </b>
+          Sourcery G++ Lite for ColdFire GNU/Linux is now based on GCC version 4.5.2.
+        </p><p><b>New <code class="option">-fstrict-volatile-bitfields</code> option. </b>
+          The compiler has a new
+	  option, <code class="option">-fstrict-volatile-bitfields</code>, which
+	  forces access to a volatile structure member using the width
+	  that conforms to its type.
+	  
+	  
+	  Refer to the GCC manual for details. 
+        </p><p><b>GCC code generation bug for casts to <code class="code">volatile</code>
+          types. </b>
+          A compiler bug has been fixed that sometimes caused incorrect code
+          for references to pointers to types with <code class="code">volatile</code> casts.
+        </p><p><b>Incorrect optimization fix. </b>
+          An optimizer bug that in rare cases caused incorrect code to
+	  be generated for complex AND and OR expressions containing
+	  redundant subexpressions has been fixed.
+        </p><p><b>Incorrect C++ warning fixed. </b>
+          A bug in GCC has been fixed that caused spurious warnings
+	  about lambda expressions in C++ code that does not use them.
+        </p><p><b>GCC bug where accesses to volatile structure fields are optimized away. </b>
+          A bug has been fixed where accesses to volatile fields of a structure
+	  were sometimes incorrectly optimized away if the structure instance
+	  was defined as non-volatile.
+        </p><p><b><code class="function">popen</code> bug fix. </b>
+          GLIBC's <code class="function">popen</code> function no longer causes a
+          deadlock situation when invoked from more than one thread.
+        </p><p><b><code class="function">strstr</code> and
+	  <code class="function">strcasestr</code> bug fixes. </b>
+          A problem has been fixed that caused GLIBC's
+	  <code class="function">strstr</code> and <code class="function">strcasestr</code>
+	  functions to return wrong results on certain inputs.
+        </p><p><b>Linux kernel headers update. </b>
+          Linux kernel header files have been updated to version
+          2.6.38.
+        </p><p><b>Improved GDB startup times when debugging remote 
+	  targets
+	. </b>
+          GDB has been enhanced to reduce the startup times when working
+	  with remote targets via GDBServer, especially when the target uses
+	  a large number of shared libraries.
+        </p></div><div class="section" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="id487277"></a>A.1.6. Changes in Sourcery G++ Lite 2010.09-40</h3></div></div></div><p><b>Linker debug information fix. </b>
+          A bug in linker processing of debug information has been
+          fixed.  The bug sometimes prevented the Sourcery G++ debugger from
+          displaying source code if the executable was linked
+	  with the <code class="option">--gc-sections</code> option.
+        </p></div><div class="section" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="id487354"></a>A.1.7. Changes in Sourcery G++ Lite 2010.09-3</h3></div></div></div><p><b>Changes to Sourcery G++ version numbering. </b>
+          Sourcery G++ product and Lite toolchains now uniformly use
+	  a version numbering scheme of the form 2011.09-22.
+	  The major and minor parts of the version number, in this
+	  case 2011.09, identify the release branch,
+	  while the final component is a build number within the branch.
+	  There are also new preprocessor macros defined by the compiler
+	  for the version number components so that you may conditionalize
+	  code for Sourcery G++ or particular Sourcery G++ versions.
+	  Details are available in the 
+	  <a class="ulink" href="https://support.codesourcery.com/GNUToolchain/kbentry1" target="_top">
+	  Sourcery G++ Knowledge Base</a>.	
+        </p><p><b>GCC fix for reference to undefined label. </b>
+          A bug in the optimizer that caused GCC to emit references
+	  to undefined labels has been fixed.
+        </p><p><b>Alignment attributes. </b>
+	  A bug has been fixed that caused the compiler to ignore
+	  alignment attributes of C++ static member variables where
+	  the attribute was present on the definition, but not the
+	  declaration.
+	</p><p><b>Compiler optimization improvements. </b>
+          The compiler has been enhanced with a number of optimization
+	  improvements, including:
+	  </p><div class="itemizedlist"><ul type="disc"><li>
+	      More efficient assignment for structures containing bitfields.
+	    </li><li>
+	      Better code for initializing C++ arrays with explicit
+	      element initializers.
+	    </li><li>
+	      Improved logic for eliminating/combining redundant comparisons in
+	      code with nested conditionals.
+	    </li><li>
+	      Better selection of loop variables, resulting in fewer
+	      temporaries and more efficient register usage.
+	    </li><li>
+              Better code when constant addresses are used as arguments to
+              inline assembly statements.
+            </li><li>
+	      Better code for copying small constant strings.
+	    </li></ul></div><p>
+        </p><p><b>GCC version 4.5.1. </b>
+	  Sourcery G++ Lite for ColdFire GNU/Linux is now based on GCC version 4.5.1.
+	  For more information about changes from GCC version 4.4 that was
+	  included in previous releases, see
+	  <code class="uri">http://gcc.gnu.org/gcc-4.5/changes.html</code>.
+        </p><p><b>C++ locale support. </b>
+          The C++ standard library now includes locale support.
+	  
+        </p><p><b>Fix for linker bug affecting C library. </b>
+	  A bug in the linker's handling of some thread-local symbols
+	  has been fixed.  One of the manifestations of this problem was
+	  a segmentation fault in the <code class="function">__res_init</code>
+	  EGLIBC function due to incorrect linking of such symbols in
+	  the C library.
+	</p><p><b>Smaller C++ programs with <code class="option">-g</code>. </b>
+          An assembler bug has been fixed that caused unnecessary references
+	  to exception-handling routines from C++ programs when debug
+	  information is enabled.  For programs that do not otherwise
+	  use exceptions, this change results in smaller code size.
+        </p><p><b>Additional validation in the assembler. </b>
+          The assembler now diagnoses an error, instead of producing
+          an invalid object file, when directives such as
+          <code class="literal">.hidden</code> are missing operands.
+          
+        </p><p><b>Strip bug fix. </b>
+          A bug in the <code class="command">strip</code> and
+	  <code class="command">objcopy</code> utilities, which resulted in
+	  stripped object files that the linker could not recognize,
+	  has been fixed.
+        </p><p><b>Binutils update. </b>
+	  The binutils package has been updated to version
+	  2.20.51.20100809 from the FSF trunk.  This update includes
+	  numerous bug fixes.
+        </p><p><b>Object file flags fix. </b>
+          The <code class="command">objdump</code> and
+	  <code class="command">readelf</code> utilities have been updated to
+	  decode ISA-C and EMAC-B ELF header flags.
+        </p><p><b>Pthreads bug fix. </b>
+	  A bug that caused programs using
+	  <code class="function">pthread_cond_wait</code> or other Pthreads functions
+	  to experience spurious wakeups or otherwise behave incorrectly
+	  has been fixed.  The bug was due to passing an incorrectly-aligned
+	  argument to the <code class="function">futex</code> system call within
+	  the Pthreads implementation.
+	</p><p><b>More efficient process creation functions. </b>
+	 The <code class="function">system</code> and
+	 <code class="function">popen</code> functions provided by GLIBC have
+	 been improved to require less memory when memory overcommit
+	 is disabled in the Linux kernel.
+       </p><p><b>Optimized string and memory functions. </b>
+	  The performance of GLIBC's string and memory functions, including
+	  <code class="function">strstr</code> and <code class="function">memmem</code>,
+	  have been significantly improved for large inputs.
+        </p><p><b>Linux kernel headers update. </b>
+          Linux kernel header files have been updated to version
+          2.6.35.2.
+        </p><p><b>GDB update. </b>
+	  The included version of GDB has been updated to
+	  7.2.50.20100908.  This update adds numerous bug fixes and
+	  new features, including improved C++ language support,
+	   a new command to save breakpoints to a file,
+	   a new
+	  convenience variable <code class="varname">$_thread</code> that holds
+	  the number of the current thread, among many other
+	  improvements.
+	</p><p><b>GDB crash fix. </b>
+          A bug has been fixed that caused GDB to crash on launch if
+          the environment variable <code class="literal">CYGPATH</code> is set
+          to a program that does not exist or cannot be executed.
+        </p><p><b>ColdFire V2-V4 OSBDM support. </b>
+          The Sourcery G++ Debug Sprite has been fixed to work around
+	  OSBDM driver issues for ColdFire V2-V4 boards.  The issues fixed
+	  include  failure to perform semihosting operations.
+        </p></div><div class="section" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="id488160"></a>A.1.8. Changes in Older Releases</h3></div></div></div><p>
+        For information about changes in older releases of
+	Sourcery G++ Lite for ColdFire GNU/Linux, 
+	please refer to the Getting Started guide packaged with those
+	releases.
+      </p></div></div></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="ch06s03.html">Prev</a> </td><td width="20%" align="center"> </td><td width="40%" align="right"> <a accesskey="n" href="chap-license.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top">6.3. Manuals for GNU Toolchain Components </td><td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td><td width="40%" align="right" valign="top"> Appendix B. Sourcery CodeBench Lite Licenses</td></tr></table></div></body></html>
