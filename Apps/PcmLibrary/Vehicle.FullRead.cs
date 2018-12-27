@@ -142,7 +142,7 @@ namespace PcmHacking
         /// </summary>
         private async Task<bool> TryReadBlock(byte[] image, int length, int startAddress, CancellationToken cancellationToken)
         {
-            this.logger.AddDebugMessage(string.Format("Reading from {0}, length {1}", startAddress, length));
+            this.logger.AddDebugMessage(string.Format("Reading from {0} / 0x{0:X}, length {1} / 0x{1:X}", startAddress, length));
             
             for(int sendAttempt = 1; sendAttempt <= MaxSendAttempts; sendAttempt++)
             {
@@ -160,49 +160,6 @@ namespace PcmHacking
                     continue;
                 }
 
-                bool sendAgain = false;
-                for (int receiveAttempt = 1; receiveAttempt <= 3; receiveAttempt++)
-                {
-                    if (cancellationToken.IsCancellationRequested)
-                    {
-                        break;
-                    }
-
-                    Message response = await this.ReceiveMessage(cancellationToken);
-                    if (response == null)
-                    {
-                        this.logger.AddDebugMessage("Did not receive a response to the read request.");
-                        sendAgain = true;
-                        break;
-                    }
-
-                    this.logger.AddDebugMessage("Processing message");
-
-                    Response<bool> readResponse = this.messageParser.ParseReadResponse(response);
-                    if (readResponse.Status != ResponseStatus.Success)
-                    {
-                        this.logger.AddDebugMessage("Not a read response.");
-                        continue;
-                    }
-
-                    if (!readResponse.Value)
-                    {
-                        this.logger.AddDebugMessage("Read request failed.");
-                        sendAgain = true;
-                        break;
-                    }
-
-                    // We got a successful read response, so now wait for the payload.
-                    sendAgain = false;
-                    break;
-                }
-
-                if (sendAgain)
-                {
-                    continue;
-                }
-
-                this.logger.AddDebugMessage("Read request allowed, expecting payload...");
                 for (int receiveAttempt = 1; receiveAttempt <= MaxReceiveAttempts; receiveAttempt++)
                 {
                     if (cancellationToken.IsCancellationRequested)

@@ -30,22 +30,6 @@ void ReadMode35()
 
 	// TODO: Validate the start address and length, fail if unreasonable.
 
-	// Send the "agree" response.
-	MessageBuffer[0] = 0x6C;
-	MessageBuffer[1] = 0xF0;
-	MessageBuffer[2] = 0x10;
-	MessageBuffer[3] = 0x75;
-
-	MessageBuffer[4] = 0x01;
-	MessageBuffer[5] = 0x54;
-	MessageBuffer[6] = 0x6C;
-	MessageBuffer[7] = 0xF0;
-
-	WriteMessage(MessageBuffer, 8, Complete);
-
-	// Give the tool time to proces that message (especially the AllPro)
-	LongSleepWithWatchdog();
-
 	// Send the payload
 	MessageBuffer[0] = 0x6D;
 	MessageBuffer[1] = 0xF0;
@@ -63,7 +47,6 @@ void ReadMode35()
 	checksum += AddReadPayloadChecksum((char*)start, length);
 
 	WriteMessage((char*)start, length, Middle);
-
 	WriteMessage((char*)&checksum, 2, End);
 }
 
