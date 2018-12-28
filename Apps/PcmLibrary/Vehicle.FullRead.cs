@@ -84,16 +84,8 @@ namespace PcmHacking
                         return Response.Create(ResponseStatus.Cancelled, (Stream)null);
                     }
 
-                    // TODO: Figure out why the AllPro is more reliable if we ALWAYS send a notification here, and then remove this hack.
-                    // (The AllPro is currently the only ELM device with a 2048 byte receive buffer, so this hack only gets invoked for it.)
-                    if (false && this.device is ElmDevice && this.device.MaxReceiveSize == 2048 + 12)
-                    {
-                        await toolPresentNotifier.ForceNotify();
-                    }
-                    else
-                    {
-                        await toolPresentNotifier.Notify();
-                    }
+                    // the read kernel needs a short message here for reasons unknown. Without it, it will RX 2 messages then drop one.
+                    await toolPresentNotifier.ForceNotify();
 
                     if (startAddress + blockSize > endAddress)
                     {
