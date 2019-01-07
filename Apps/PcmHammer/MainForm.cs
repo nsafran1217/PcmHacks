@@ -830,7 +830,9 @@ namespace PcmHacking
                 }
 
                 UInt32 kernelVersion = 0;
+                uint osid= 0;
                 bool needUnlock;
+                bool needMatchingOSID = false;
                 int keyAlgorithm = 1;
 
                 try
@@ -839,10 +841,12 @@ namespace PcmHacking
                     Response<uint> osidResponse = await this.vehicle.QueryOperatingSystemId();
                     if (osidResponse.Status == ResponseStatus.Success)
                     {
-                        this.AddUserMessage("Operating System: " + osidResponse.Value.ToString());
-                        PcmInfo info = new PcmInfo(osidResponse.Value);
+                        this.AddUserMessage("PCM Operating System: " + osidResponse.Value.ToString());
+                        osid = osidResponse.Value;
+                        PcmInfo info = new PcmInfo(osid);
                         keyAlgorithm = info.KeyAlgorithm;
                         needUnlock = true;
+                        needMatchingOSID = true;
                     }
                     else
                     {
@@ -899,7 +903,6 @@ namespace PcmHacking
                         }
 
                         // Sanity checks. 
-                        // TODO: Check OSID as well, ask user to confirm if it doesn't match.
                         if ((image.Length != 512 * 1024) && (image.Length != 1024 * 1024))
                         {
                             this.AddUserMessage("This file is not a supported size.");
@@ -915,6 +918,13 @@ namespace PcmHacking
                         if ((image[0x7FFFE] != 0x4A) || (image[0x07FFFF] != 0xFC))
                         {
                             this.AddUserMessage("This file does not contain the expected signature at 0x7FFFE/0x7FFFF.");
+                            return;
+                        }
+
+                        if ((needMatchingOSID == true) && (osid != GetOSIDFromImage(image)))
+                        {
+                            this.AddUserMessage("File OSID (" + GetOSIDFromImage(image).ToString() + ") does not match PCM OSID (" + osid.ToString() + ").");
+                            this.AddUserMessage("Only calibration flashes are supported at this time.");
                             return;
                         }
 
@@ -941,6 +951,25 @@ namespace PcmHacking
             }
 
         }
+
+        /// <summary>
+        /// Get the OSID from the file that the user wants to flash.
+        /// TODO: This helper function is in the wrong place. Where is the right place?
+        /// </summary>
+        public uint GetOSIDFromImage(byte[] image)
+        {
+            int osid = 0;
+            if (image.Length == 512 * 1024 || image.Length == 1024 * 1024) // bin valid sizes
+            {
+                osid += image[0x504] << 24;
+                osid += image[0x505] << 16;
+                osid += image[0x506] << 8;
+                osid += image[0x507] << 0;
+            }
+
+            return (uint)osid;
+        }
+
 
         /// <summary>
         /// From the user's perspective, this is for exiting the kernel, in 
