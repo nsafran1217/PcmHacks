@@ -4,8 +4,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Resources;
-using System.Runtime.Serialization.Formatters.Binary;
-using System.IO;
 
 namespace PcmHacking
 {
@@ -23,8 +21,6 @@ namespace PcmHacking
         {
             switch (algo)
             {
-                case 0x00:
-                case 0x01:
                 case 0x0F: // Black Box
                 case 0x14: // P04
                 case 0x28: // P01, P59

@@ -63,26 +63,6 @@ namespace PcmHacking.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Byte[].
         /// </summary>
-        internal static byte[] keys_00 {
-            get {
-                object obj = ResourceManager.GetObject("keys_00", resourceCulture);
-                return ((byte[])(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Byte[].
-        /// </summary>
-        internal static byte[] keys_01 {
-            get {
-                object obj = ResourceManager.GetObject("keys_01", resourceCulture);
-                return ((byte[])(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Byte[].
-        /// </summary>
         internal static byte[] keys_0F {
             get {
                 object obj = ResourceManager.GetObject("keys_0F", resourceCulture);
