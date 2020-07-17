@@ -1,0 +1,1 @@
+These files contain the key data for all known algorothms. Because most of them are not needed they are not added as a PCMLibrary binary resource, but they can be added as program functionality is extended by dragging and dropping them in to the PCMLibrary resources tab so that they are linked in to the app and become available to the KeyAlgorithm class.
