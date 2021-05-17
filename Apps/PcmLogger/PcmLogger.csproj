@@ -53,6 +53,9 @@
     <Reference Include="netstandard" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="MainForm.HistogramView.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="MainForm.LoggingThread.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -72,6 +75,12 @@
     <Compile Include="PathDisplayAdapter.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SetupHistogram.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SetupHistogram.Designer.cs">
+      <DependentUpon>SetupHistogram.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -87,6 +96,9 @@
     <Compile Include="MainForm.ProfileList.cs">
       <SubType>Form</SubType>
     </Compile>
+    <EmbeddedResource Include="SetupHistogram.resx">
+      <DependentUpon>SetupHistogram.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>PublicSettingsSingleFileGenerator</Generator>

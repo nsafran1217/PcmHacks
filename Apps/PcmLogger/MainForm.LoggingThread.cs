@@ -317,6 +317,8 @@ namespace PcmHacking
 
                         string formattedValues = FormatValuesForTextBox(row.Item1, row.Item3);
 
+                        updateHistogramFromLogger(row.Item1, row.Item3); //send data to histogram
+
                         this.BeginInvoke((MethodInvoker)
                         delegate ()
                         {

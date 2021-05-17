@@ -54,9 +54,14 @@
             this.nameColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.unitsColumn = new System.Windows.Forms.DataGridViewComboBoxColumn();
             this.logValues = new System.Windows.Forms.TextBox();
-            this.dashboardTab = new System.Windows.Forms.TabPage();
             this.debugTab = new System.Windows.Forms.TabPage();
             this.debugLog = new System.Windows.Forms.TextBox();
+            this.histogramTab = new System.Windows.Forms.TabPage();
+            this.testAddDataButton = new System.Windows.Forms.Button();
+            this.openPreviousLogButton = new System.Windows.Forms.Button();
+            this.histogramDataGridView = new System.Windows.Forms.DataGridView();
+            this.openSetupHistogramButton = new System.Windows.Forms.Button();
+            this.dashboardTab = new System.Windows.Forms.TabPage();
             this.startStopSaving = new System.Windows.Forms.Button();
             this.tabs.SuspendLayout();
             this.configurationTab.SuspendLayout();
@@ -68,6 +73,8 @@
             this.parametersSplitter.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.parameterGrid)).BeginInit();
             this.debugTab.SuspendLayout();
+            this.histogramTab.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.histogramDataGridView)).BeginInit();
             this.SuspendLayout();
             // 
             // loggerProgress
@@ -93,6 +100,7 @@
             this.tabs.Controls.Add(this.profilesTab);
             this.tabs.Controls.Add(this.parametersTab);
             this.tabs.Controls.Add(this.debugTab);
+            this.tabs.Controls.Add(this.histogramTab);
             this.tabs.Location = new System.Drawing.Point(12, 40);
             this.tabs.Name = "tabs";
             this.tabs.SelectedIndex = 0;
@@ -314,7 +322,7 @@
             this.parameterGrid.ShowCellErrors = false;
             this.parameterGrid.ShowEditingIcon = false;
             this.parameterGrid.ShowRowErrors = false;
-            this.parameterGrid.Size = new System.Drawing.Size(400, 399);
+            this.parameterGrid.Size = new System.Drawing.Size(398, 397);
             this.parameterGrid.TabIndex = 0;
             this.parameterGrid.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.parameterGrid_CellContentClick);
             this.parameterGrid.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.parameterGrid_CellValueChanged);
@@ -354,16 +362,6 @@
             this.logValues.Size = new System.Drawing.Size(339, 427);
             this.logValues.TabIndex = 0;
             // 
-            // dashboardTab
-            // 
-            this.dashboardTab.Location = new System.Drawing.Point(4, 22);
-            this.dashboardTab.Name = "dashboardTab";
-            this.dashboardTab.Padding = new System.Windows.Forms.Padding(3);
-            this.dashboardTab.Size = new System.Drawing.Size(743, 427);
-            this.dashboardTab.TabIndex = 0;
-            this.dashboardTab.Text = "Dashboard";
-            this.dashboardTab.UseVisualStyleBackColor = true;
-            // 
             // debugTab
             // 
             this.debugTab.Controls.Add(this.debugLog);
@@ -385,6 +383,82 @@
             this.debugLog.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.debugLog.Size = new System.Drawing.Size(737, 421);
             this.debugLog.TabIndex = 0;
+            // 
+            // histogramTab
+            // 
+            this.histogramTab.Controls.Add(this.testAddDataButton);
+            this.histogramTab.Controls.Add(this.openPreviousLogButton);
+            this.histogramTab.Controls.Add(this.histogramDataGridView);
+            this.histogramTab.Controls.Add(this.openSetupHistogramButton);
+            this.histogramTab.Location = new System.Drawing.Point(4, 22);
+            this.histogramTab.Name = "histogramTab";
+            this.histogramTab.Padding = new System.Windows.Forms.Padding(3);
+            this.histogramTab.Size = new System.Drawing.Size(743, 427);
+            this.histogramTab.TabIndex = 5;
+            this.histogramTab.Text = "Histogram";
+            this.histogramTab.UseVisualStyleBackColor = true;
+            // 
+            // testAddDataButton
+            // 
+            this.testAddDataButton.Location = new System.Drawing.Point(252, 7);
+            this.testAddDataButton.Name = "testAddDataButton";
+            this.testAddDataButton.Size = new System.Drawing.Size(178, 23);
+            this.testAddDataButton.TabIndex = 3;
+            this.testAddDataButton.Text = "Add Test Data";
+            this.testAddDataButton.UseVisualStyleBackColor = true;
+            this.testAddDataButton.Click += new System.EventHandler(this.testAddDataButton_Click);
+            // 
+            // openPreviousLogButton
+            // 
+            this.openPreviousLogButton.Location = new System.Drawing.Point(619, 6);
+            this.openPreviousLogButton.Name = "openPreviousLogButton";
+            this.openPreviousLogButton.Size = new System.Drawing.Size(118, 23);
+            this.openPreviousLogButton.TabIndex = 2;
+            this.openPreviousLogButton.Text = "Open Previous Log";
+            this.openPreviousLogButton.UseVisualStyleBackColor = true;
+            this.openPreviousLogButton.Click += new System.EventHandler(this.openPreviousLogButton_Click);
+            // 
+            // histogramDataGridView
+            // 
+            this.histogramDataGridView.AllowUserToAddRows = false;
+            this.histogramDataGridView.AllowUserToDeleteRows = false;
+            this.histogramDataGridView.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.histogramDataGridView.ClipboardCopyMode = System.Windows.Forms.DataGridViewClipboardCopyMode.EnableWithoutHeaderText;
+            this.histogramDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.histogramDataGridView.Location = new System.Drawing.Point(7, 37);
+            this.histogramDataGridView.Name = "histogramDataGridView";
+            this.histogramDataGridView.ReadOnly = true;
+            this.histogramDataGridView.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
+            this.histogramDataGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
+            this.histogramDataGridView.ShowCellErrors = false;
+            this.histogramDataGridView.ShowCellToolTips = false;
+            this.histogramDataGridView.ShowEditingIcon = false;
+            this.histogramDataGridView.ShowRowErrors = false;
+            this.histogramDataGridView.Size = new System.Drawing.Size(730, 384);
+            this.histogramDataGridView.TabIndex = 1;
+            this.histogramDataGridView.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.histogramDataGridView_DataBindingComplete);
+            // 
+            // openSetupHistogramButton
+            // 
+            this.openSetupHistogramButton.Location = new System.Drawing.Point(7, 7);
+            this.openSetupHistogramButton.Name = "openSetupHistogramButton";
+            this.openSetupHistogramButton.Size = new System.Drawing.Size(109, 23);
+            this.openSetupHistogramButton.TabIndex = 0;
+            this.openSetupHistogramButton.Text = "Setup Histogram";
+            this.openSetupHistogramButton.UseVisualStyleBackColor = true;
+            this.openSetupHistogramButton.Click += new System.EventHandler(this.openSetupHistogramButton_Click);
+            // 
+            // dashboardTab
+            // 
+            this.dashboardTab.Location = new System.Drawing.Point(4, 22);
+            this.dashboardTab.Name = "dashboardTab";
+            this.dashboardTab.Padding = new System.Windows.Forms.Padding(3);
+            this.dashboardTab.Size = new System.Drawing.Size(743, 427);
+            this.dashboardTab.TabIndex = 0;
+            this.dashboardTab.Text = "Dashboard";
+            this.dashboardTab.UseVisualStyleBackColor = true;
             // 
             // startStopSaving
             // 
@@ -423,6 +497,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.parameterGrid)).EndInit();
             this.debugTab.ResumeLayout(false);
             this.debugTab.PerformLayout();
+            this.histogramTab.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.histogramDataGridView)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -454,6 +530,11 @@
         private System.Windows.Forms.SplitContainer parametersSplitter;
         private System.Windows.Forms.TextBox parameterSearch;
         private System.Windows.Forms.Button removeProfileButton;
+        private System.Windows.Forms.TabPage histogramTab;
+        private System.Windows.Forms.DataGridView histogramDataGridView;
+        private System.Windows.Forms.Button openSetupHistogramButton;
+        private System.Windows.Forms.Button openPreviousLogButton;
+        private System.Windows.Forms.Button testAddDataButton;
     }
 }
 

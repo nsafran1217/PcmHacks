@@ -1140,4 +1140,13 @@
         bitMapped="False">
         <Conversion units="Boolean" expression="(x)" format="0.00" />
     </Parameter>
+    <Parameter
+        id="114B"
+        name="AEM EGR Wideband A/F Ratio"
+        description=""
+        type="PID"
+        byteCount="01"
+        bitMapped="False">
+      <Conversion units=":1" expression="(2.3750*(x/51.00)) +7.3125" format="0.00" />
+    </Parameter>
 </Parameters>

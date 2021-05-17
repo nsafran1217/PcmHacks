@@ -8,6 +8,16 @@
       xParameterConversion="g/s"
       yParameterId="000C"
       yParameterConversion="RPM">
-    <Conversion units="g/cyl" expression="x*60.0/(y*2)" format="0.00" />
+    <Conversion units="g/cyl" expression="x*15.0/(y*2)" format="0.00" />
+  </MathParameter>
+  <MathParameter
+      id="MathAFRErrorEGRAEM"
+      name="AEM A/F Error (EGR)"
+      description=""
+      xParameterId="114B"
+      xParameterConversion=":1"
+      yParameterId="119E"
+      yParameterConversion=":1">
+    <Conversion units="%" expression="(((2.3750*(x/51.00)) +7.3125)-(y/10))/(y-10)" format="0.00" />
   </MathParameter>
 </MathParameters>
