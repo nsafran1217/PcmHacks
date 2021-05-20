@@ -57,7 +57,10 @@
             this.debugTab = new System.Windows.Forms.TabPage();
             this.debugLog = new System.Windows.Forms.TextBox();
             this.histogramTab = new System.Windows.Forms.TabPage();
-            this.testAddDataButton = new System.Windows.Forms.Button();
+            this.histogramNameLabel = new System.Windows.Forms.Label();
+            this.columnAxisLabel = new System.Windows.Forms.Label();
+            this.parameterLabel = new System.Windows.Forms.Label();
+            this.rowAxisLabel = new System.Windows.Forms.Label();
             this.openPreviousLogButton = new System.Windows.Forms.Button();
             this.histogramDataGridView = new System.Windows.Forms.DataGridView();
             this.openSetupHistogramButton = new System.Windows.Forms.Button();
@@ -386,7 +389,10 @@
             // 
             // histogramTab
             // 
-            this.histogramTab.Controls.Add(this.testAddDataButton);
+            this.histogramTab.Controls.Add(this.histogramNameLabel);
+            this.histogramTab.Controls.Add(this.columnAxisLabel);
+            this.histogramTab.Controls.Add(this.parameterLabel);
+            this.histogramTab.Controls.Add(this.rowAxisLabel);
             this.histogramTab.Controls.Add(this.openPreviousLogButton);
             this.histogramTab.Controls.Add(this.histogramDataGridView);
             this.histogramTab.Controls.Add(this.openSetupHistogramButton);
@@ -398,19 +404,53 @@
             this.histogramTab.Text = "Histogram";
             this.histogramTab.UseVisualStyleBackColor = true;
             // 
-            // testAddDataButton
+            // histogramNameLabel
             // 
-            this.testAddDataButton.Location = new System.Drawing.Point(252, 7);
-            this.testAddDataButton.Name = "testAddDataButton";
-            this.testAddDataButton.Size = new System.Drawing.Size(178, 23);
-            this.testAddDataButton.TabIndex = 3;
-            this.testAddDataButton.Text = "Add Test Data";
-            this.testAddDataButton.UseVisualStyleBackColor = true;
-            this.testAddDataButton.Click += new System.EventHandler(this.testAddDataButton_Click);
+            this.histogramNameLabel.AutoSize = true;
+            this.histogramNameLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F);
+            this.histogramNameLabel.Location = new System.Drawing.Point(258, 3);
+            this.histogramNameLabel.Name = "histogramNameLabel";
+            this.histogramNameLabel.Size = new System.Drawing.Size(70, 26);
+            this.histogramNameLabel.TabIndex = 7;
+            this.histogramNameLabel.Text = "label1";
+            // 
+            // columnAxisLabel
+            // 
+            this.columnAxisLabel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.columnAxisLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F);
+            this.columnAxisLabel.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.columnAxisLabel.Location = new System.Drawing.Point(90, 33);
+            this.columnAxisLabel.Name = "columnAxisLabel";
+            this.columnAxisLabel.Size = new System.Drawing.Size(647, 32);
+            this.columnAxisLabel.TabIndex = 6;
+            this.columnAxisLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // parameterLabel
+            // 
+            this.parameterLabel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.parameterLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F);
+            this.parameterLabel.Location = new System.Drawing.Point(85, 392);
+            this.parameterLabel.Name = "parameterLabel";
+            this.parameterLabel.Size = new System.Drawing.Size(655, 32);
+            this.parameterLabel.TabIndex = 5;
+            this.parameterLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // rowAxisLabel
+            // 
+            this.rowAxisLabel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
+            this.rowAxisLabel.Location = new System.Drawing.Point(6, 68);
+            this.rowAxisLabel.Name = "rowAxisLabel";
+            this.rowAxisLabel.Size = new System.Drawing.Size(32, 321);
+            this.rowAxisLabel.TabIndex = 4;
+            this.rowAxisLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.rowAxisLabel.Paint += new System.Windows.Forms.PaintEventHandler(this.rowAxisLabel_Paint);
             // 
             // openPreviousLogButton
             // 
-            this.openPreviousLogButton.Location = new System.Drawing.Point(619, 6);
+            this.openPreviousLogButton.Location = new System.Drawing.Point(122, 7);
             this.openPreviousLogButton.Name = "openPreviousLogButton";
             this.openPreviousLogButton.Size = new System.Drawing.Size(118, 23);
             this.openPreviousLogButton.TabIndex = 2;
@@ -427,7 +467,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.histogramDataGridView.ClipboardCopyMode = System.Windows.Forms.DataGridViewClipboardCopyMode.EnableWithoutHeaderText;
             this.histogramDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.histogramDataGridView.Location = new System.Drawing.Point(7, 37);
+            this.histogramDataGridView.Location = new System.Drawing.Point(44, 68);
             this.histogramDataGridView.Name = "histogramDataGridView";
             this.histogramDataGridView.ReadOnly = true;
             this.histogramDataGridView.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
@@ -436,7 +476,7 @@
             this.histogramDataGridView.ShowCellToolTips = false;
             this.histogramDataGridView.ShowEditingIcon = false;
             this.histogramDataGridView.ShowRowErrors = false;
-            this.histogramDataGridView.Size = new System.Drawing.Size(730, 384);
+            this.histogramDataGridView.Size = new System.Drawing.Size(693, 321);
             this.histogramDataGridView.TabIndex = 1;
             this.histogramDataGridView.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.histogramDataGridView_DataBindingComplete);
             // 
@@ -498,6 +538,7 @@
             this.debugTab.ResumeLayout(false);
             this.debugTab.PerformLayout();
             this.histogramTab.ResumeLayout(false);
+            this.histogramTab.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.histogramDataGridView)).EndInit();
             this.ResumeLayout(false);
 
@@ -534,7 +575,10 @@
         private System.Windows.Forms.DataGridView histogramDataGridView;
         private System.Windows.Forms.Button openSetupHistogramButton;
         private System.Windows.Forms.Button openPreviousLogButton;
-        private System.Windows.Forms.Button testAddDataButton;
+        private System.Windows.Forms.Label rowAxisLabel;
+        private System.Windows.Forms.Label columnAxisLabel;
+        private System.Windows.Forms.Label parameterLabel;
+        private System.Windows.Forms.Label histogramNameLabel;
     }
 }
 

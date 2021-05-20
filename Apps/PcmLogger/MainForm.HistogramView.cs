@@ -69,6 +69,10 @@ namespace PcmHacking
                     midValue = setupDialog.midValue;
                     lowValue = setupDialog.lowValue;
 
+                    //rowAxisLabel.Text = rowParameterName;
+                    columnAxisLabel.Text = colParameterName;
+                    parameterLabel.Text = parameterName;
+
                     histogramDataGridView.DataSource = histogram.displayedValues;
 
                     if (histogram.rowHeader != null)
@@ -252,6 +256,17 @@ namespace PcmHacking
             //    //histogramDataGridView.Rows[histogram.lastChangedCellLocation[1]].Cells[histogram.lastChangedCellLocation[0]].Style.BackColor = highValueColor;
             //
         }
+        private void rowAxisLabel_Paint(object sender, PaintEventArgs e)
+        {
+            Font myFont = new Font("Microsoft Sans Serif,", 16);
+            Brush myBrush = new System.Drawing.SolidBrush(System.Drawing.Color.Black);
+            //rowParameterName = "test string vertical";
+            int height = rowAxisLabel.Height;
+            e.Graphics.TranslateTransform(4, height-(height/4));
+            e.Graphics.RotateTransform(270);
+            e.Graphics.DrawString(rowParameterName, myFont, myBrush, 0, 0);
+        }
+
 
         private void testAddDataButton_Click(object sender, EventArgs e) //call add random data method
         {

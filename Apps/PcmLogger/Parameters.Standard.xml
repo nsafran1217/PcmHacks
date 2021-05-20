@@ -562,7 +562,7 @@
         description=""	
         byteCount="01"
         bitMapped="False">
-        <Conversion units=":1" expression="(x/10)" format="0.00" />
+        <Conversion units=":1" expression="(x/10.00)" format="0.00" />
     </Parameter>
     <Parameter
         id="119F"
@@ -1149,4 +1149,5 @@
         bitMapped="False">
       <Conversion units=":1" expression="(2.3750*(x/51.00)) +7.3125" format="0.00" />
     </Parameter>
+  
 </Parameters>
