@@ -13,18 +13,22 @@ namespace PcmHacking
 {
     public partial class SetupHistogram : Form
     {
-        public Histogram histogram;
-        public Color highValueColor;
-        public Color lowValueColor;
+        public Histogram histogram { get; private set; }
+        public Color highValueColor { get; private set; }
+        public Color lowValueColor { get; private set; }
         public float highValue = 0;
         public float midValue = 0;
         public float lowValue = 0;
-        public string colParameter;
-        public string rowParameter;
-        public string parameter;
+        public string colParameter { get; private set; }
+        public string rowParameter { get; private set; }
+        public string parameter { get; private set; }
         private List<string> parameters;
         private List<string> colParameters;
         private List<string> rowParameters;
+        private HistogramProfile[] histogramProfiles;
+        private List<string> histogramProfilesNames;
+        //private List<string> histogramProfilesNames;
+        private readonly string profileXMLPath = ((System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetEntryAssembly().Location).ToString()) + "\\histogramProfiles.xml");
 
         public SetupHistogram(List<string> avaliableParameters)
         {
@@ -33,10 +37,17 @@ namespace PcmHacking
             colParameters = avaliableParameters.ToList();
             rowParameters = avaliableParameters.ToList();
             rowParameters.Add(""); //make sure a blank one is avaliable for the row
+            histogramProfiles = HistogramProfileReaderWriter.readHistogramProfiles(profileXMLPath).ToArray();
+            List<string> histogramProfilesNames = new List<string>(); ;
+            foreach (HistogramProfile profile in histogramProfiles)
+            {
+                histogramProfilesNames.Add(profile.Name);
+            }
             InitializeComponent();
             parameterComboBox.DataSource = this.parameters;
             columnAxisParameterComboBox.DataSource = this.colParameters;
             rowAxisParameterComboBox.DataSource = this.rowParameters;
+            presetsComboBox.DataSource = this.histogramProfilesNames;
         }
 
         private void highValueColorButton_Click(object sender, EventArgs e)
@@ -153,6 +164,40 @@ namespace PcmHacking
 
             this.DialogResult = DialogResult.OK;
             this.Close();
+        }
+
+        private void savePresetButton_Click(object sender, EventArgs e)
+        {
+            parameter = this.parameterComboBox.GetItemText(this.parameterComboBox.SelectedItem);
+            colParameter = this.columnAxisParameterComboBox.GetItemText(this.columnAxisParameterComboBox.SelectedItem);
+            rowParameter = this.rowAxisParameterComboBox.GetItemText(this.rowAxisParameterComboBox.SelectedItem);
+            string Name = namelTextBox.Text;
+            string columnHeaders = columnAxisValuesTextBox.Text;
+            string decimalPoints = numOfDecimalsTextBox.Text;
+            string cellHits = cellHitsTextBox.Text;
+            string rowHeaders;
+            if (String.IsNullOrEmpty(rowParameter))
+            {
+                rowHeaders = "";
+            }
+            else {
+                rowHeaders = rowAxisValuesTextBox.Text;
+            }
+            HistogramProfile profile = new HistogramProfile(
+                Name,
+                columnHeaders,
+                rowHeaders,
+                colParameter,
+                rowParameter,
+                parameter,
+                cellHits,
+                decimalPoints);
+            HistogramProfileReaderWriter.writeHistogramProfile(profile, profileXMLPath);
+        }
+
+        private void deletePresetButton_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

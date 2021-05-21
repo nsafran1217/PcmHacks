@@ -30,12 +30,10 @@
         {
             this.highValueColorDialog = new System.Windows.Forms.ColorDialog();
             this.lowValueColorDialog = new System.Windows.Forms.ColorDialog();
-            this.labelLabel = new System.Windows.Forms.Label();
-            this.labelTextBox = new System.Windows.Forms.TextBox();
+            this.nameLabel = new System.Windows.Forms.Label();
+            this.namelTextBox = new System.Windows.Forms.TextBox();
             this.columnAxisParameterComboBox = new System.Windows.Forms.ComboBox();
             this.parameterLabel2 = new System.Windows.Forms.Label();
-            this.unitsLabel2 = new System.Windows.Forms.Label();
-            this.columnAxisUnitsTextBox = new System.Windows.Forms.TextBox();
             this.columnAxisGroupBox = new System.Windows.Forms.GroupBox();
             this.valueInfoLabel1 = new System.Windows.Forms.Label();
             this.columnAxisValuesTextBox = new System.Windows.Forms.TextBox();
@@ -56,10 +54,8 @@
             this.decimalsLabel = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.functionLabel = new System.Windows.Forms.Label();
-            this.unitsComboBox = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
             this.parameterComboBox = new System.Windows.Forms.ComboBox();
-            this.unitsLabel1 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.parameterLabel1 = new System.Windows.Forms.Label();
             this.parameterGroupBox = new System.Windows.Forms.GroupBox();
@@ -71,11 +67,13 @@
             this.valueInfoLabel2 = new System.Windows.Forms.Label();
             this.rowAxisValuesTextBox = new System.Windows.Forms.TextBox();
             this.valuesLabel2 = new System.Windows.Forms.Label();
-            this.rowAxisUnitsTextBox = new System.Windows.Forms.TextBox();
-            this.unitsLabel3 = new System.Windows.Forms.Label();
             this.parameterLabel3 = new System.Windows.Forms.Label();
             this.rowAxisParameterComboBox = new System.Windows.Forms.ComboBox();
             this.oKButton = new System.Windows.Forms.Button();
+            this.presetsComboBox = new System.Windows.Forms.ComboBox();
+            this.presetsLabel = new System.Windows.Forms.Label();
+            this.savePresetButton = new System.Windows.Forms.Button();
+            this.deletePresetButton = new System.Windows.Forms.Button();
             this.columnAxisGroupBox.SuspendLayout();
             this.shadingGroupBox.SuspendLayout();
             this.parameterGroupBox.SuspendLayout();
@@ -93,22 +91,22 @@
             this.lowValueColorDialog.Color = System.Drawing.Color.Transparent;
             this.lowValueColorDialog.SolidColorOnly = true;
             // 
-            // labelLabel
+            // nameLabel
             // 
-            this.labelLabel.AutoSize = true;
-            this.labelLabel.Location = new System.Drawing.Point(18, 15);
-            this.labelLabel.Name = "labelLabel";
-            this.labelLabel.Size = new System.Drawing.Size(36, 13);
-            this.labelLabel.TabIndex = 0;
-            this.labelLabel.Text = "Label:";
+            this.nameLabel.AutoSize = true;
+            this.nameLabel.Location = new System.Drawing.Point(312, 78);
+            this.nameLabel.Name = "nameLabel";
+            this.nameLabel.Size = new System.Drawing.Size(38, 13);
+            this.nameLabel.TabIndex = 0;
+            this.nameLabel.Text = "Name:";
             // 
-            // labelTextBox
+            // namelTextBox
             // 
-            this.labelTextBox.Location = new System.Drawing.Point(94, 12);
-            this.labelTextBox.Name = "labelTextBox";
-            this.labelTextBox.Size = new System.Drawing.Size(161, 20);
-            this.labelTextBox.TabIndex = 1;
-            this.labelTextBox.Text = "New Histogram";
+            this.namelTextBox.Location = new System.Drawing.Point(372, 75);
+            this.namelTextBox.Name = "namelTextBox";
+            this.namelTextBox.Size = new System.Drawing.Size(266, 20);
+            this.namelTextBox.TabIndex = 1;
+            this.namelTextBox.Text = "New Histogram";
             // 
             // columnAxisParameterComboBox
             // 
@@ -129,34 +127,16 @@
             this.parameterLabel2.TabIndex = 3;
             this.parameterLabel2.Text = "Parameter:";
             // 
-            // unitsLabel2
-            // 
-            this.unitsLabel2.AutoSize = true;
-            this.unitsLabel2.Location = new System.Drawing.Point(6, 52);
-            this.unitsLabel2.Name = "unitsLabel2";
-            this.unitsLabel2.Size = new System.Drawing.Size(34, 13);
-            this.unitsLabel2.TabIndex = 5;
-            this.unitsLabel2.Text = "Units:";
-            // 
-            // columnAxisUnitsTextBox
-            // 
-            this.columnAxisUnitsTextBox.Location = new System.Drawing.Point(82, 49);
-            this.columnAxisUnitsTextBox.Name = "columnAxisUnitsTextBox";
-            this.columnAxisUnitsTextBox.Size = new System.Drawing.Size(160, 20);
-            this.columnAxisUnitsTextBox.TabIndex = 6;
-            // 
             // columnAxisGroupBox
             // 
             this.columnAxisGroupBox.Controls.Add(this.valueInfoLabel1);
             this.columnAxisGroupBox.Controls.Add(this.columnAxisValuesTextBox);
             this.columnAxisGroupBox.Controls.Add(this.valuesLabel1);
-            this.columnAxisGroupBox.Controls.Add(this.columnAxisUnitsTextBox);
-            this.columnAxisGroupBox.Controls.Add(this.unitsLabel2);
             this.columnAxisGroupBox.Controls.Add(this.parameterLabel2);
             this.columnAxisGroupBox.Controls.Add(this.columnAxisParameterComboBox);
-            this.columnAxisGroupBox.Location = new System.Drawing.Point(12, 341);
+            this.columnAxisGroupBox.Location = new System.Drawing.Point(12, 292);
             this.columnAxisGroupBox.Name = "columnAxisGroupBox";
-            this.columnAxisGroupBox.Size = new System.Drawing.Size(616, 115);
+            this.columnAxisGroupBox.Size = new System.Drawing.Size(616, 80);
             this.columnAxisGroupBox.TabIndex = 24;
             this.columnAxisGroupBox.TabStop = false;
             this.columnAxisGroupBox.Text = "Column Axis";
@@ -164,7 +144,7 @@
             // valueInfoLabel1
             // 
             this.valueInfoLabel1.AutoSize = true;
-            this.valueInfoLabel1.Location = new System.Drawing.Point(300, 52);
+            this.valueInfoLabel1.Location = new System.Drawing.Point(300, 25);
             this.valueInfoLabel1.Name = "valueInfoLabel1";
             this.valueInfoLabel1.Size = new System.Drawing.Size(230, 13);
             this.valueInfoLabel1.TabIndex = 9;
@@ -172,9 +152,9 @@
             // 
             // columnAxisValuesTextBox
             // 
-            this.columnAxisValuesTextBox.Location = new System.Drawing.Point(82, 76);
+            this.columnAxisValuesTextBox.Location = new System.Drawing.Point(82, 49);
             this.columnAxisValuesTextBox.Name = "columnAxisValuesTextBox";
-            this.columnAxisValuesTextBox.Size = new System.Drawing.Size(487, 20);
+            this.columnAxisValuesTextBox.Size = new System.Drawing.Size(512, 20);
             this.columnAxisValuesTextBox.TabIndex = 8;
             this.columnAxisValuesTextBox.Text = "400,600,800,1000,1200,1400,1600,1800,2000,2200,2400,2800,3200,3600,4000,4400,4800" +
     ",5200,5600,6000,6400,6800,7200,7600,8000";
@@ -182,7 +162,7 @@
             // valuesLabel1
             // 
             this.valuesLabel1.AutoSize = true;
-            this.valuesLabel1.Location = new System.Drawing.Point(6, 79);
+            this.valuesLabel1.Location = new System.Drawing.Point(6, 52);
             this.valuesLabel1.Name = "valuesLabel1";
             this.valuesLabel1.Size = new System.Drawing.Size(42, 13);
             this.valuesLabel1.TabIndex = 7;
@@ -284,7 +264,7 @@
             this.shadingGroupBox.Controls.Add(this.highValueTextBox);
             this.shadingGroupBox.Controls.Add(this.lowValueTextBox);
             this.shadingGroupBox.Controls.Add(this.midValueTextBox);
-            this.shadingGroupBox.Location = new System.Drawing.Point(12, 224);
+            this.shadingGroupBox.Location = new System.Drawing.Point(12, 175);
             this.shadingGroupBox.Name = "shadingGroupBox";
             this.shadingGroupBox.Size = new System.Drawing.Size(261, 111);
             this.shadingGroupBox.TabIndex = 22;
@@ -311,7 +291,7 @@
             // decimalsLabel
             // 
             this.decimalsLabel.AutoSize = true;
-            this.decimalsLabel.Location = new System.Drawing.Point(6, 80);
+            this.decimalsLabel.Location = new System.Drawing.Point(6, 52);
             this.decimalsLabel.Name = "decimalsLabel";
             this.decimalsLabel.Size = new System.Drawing.Size(53, 13);
             this.decimalsLabel.TabIndex = 6;
@@ -329,19 +309,11 @@
             // functionLabel
             // 
             this.functionLabel.AutoSize = true;
-            this.functionLabel.Location = new System.Drawing.Point(6, 120);
+            this.functionLabel.Location = new System.Drawing.Point(8, 78);
             this.functionLabel.Name = "functionLabel";
             this.functionLabel.Size = new System.Drawing.Size(51, 13);
             this.functionLabel.TabIndex = 8;
             this.functionLabel.Text = "Function:";
-            // 
-            // unitsComboBox
-            // 
-            this.unitsComboBox.FormattingEnabled = true;
-            this.unitsComboBox.Location = new System.Drawing.Point(82, 49);
-            this.unitsComboBox.Name = "unitsComboBox";
-            this.unitsComboBox.Size = new System.Drawing.Size(161, 21);
-            this.unitsComboBox.TabIndex = 5;
             // 
             // label1
             // 
@@ -360,15 +332,6 @@
             this.parameterComboBox.Name = "parameterComboBox";
             this.parameterComboBox.Size = new System.Drawing.Size(161, 21);
             this.parameterComboBox.TabIndex = 3;
-            // 
-            // unitsLabel1
-            // 
-            this.unitsLabel1.AutoSize = true;
-            this.unitsLabel1.Location = new System.Drawing.Point(6, 52);
-            this.unitsLabel1.Name = "unitsLabel1";
-            this.unitsLabel1.Size = new System.Drawing.Size(34, 13);
-            this.unitsLabel1.TabIndex = 4;
-            this.unitsLabel1.Text = "Units:";
             // 
             // label6
             // 
@@ -393,23 +356,21 @@
             this.parameterGroupBox.Controls.Add(this.cellHitsTextBox);
             this.parameterGroupBox.Controls.Add(this.cellHitsLabel);
             this.parameterGroupBox.Controls.Add(this.parameterLabel1);
-            this.parameterGroupBox.Controls.Add(this.unitsLabel1);
             this.parameterGroupBox.Controls.Add(this.functionTextBox);
             this.parameterGroupBox.Controls.Add(this.parameterComboBox);
-            this.parameterGroupBox.Controls.Add(this.unitsComboBox);
             this.parameterGroupBox.Controls.Add(this.functionLabel);
             this.parameterGroupBox.Controls.Add(this.decimalsLabel);
             this.parameterGroupBox.Controls.Add(this.numOfDecimalsTextBox);
             this.parameterGroupBox.Location = new System.Drawing.Point(12, 38);
             this.parameterGroupBox.Name = "parameterGroupBox";
-            this.parameterGroupBox.Size = new System.Drawing.Size(477, 180);
+            this.parameterGroupBox.Size = new System.Drawing.Size(261, 131);
             this.parameterGroupBox.TabIndex = 23;
             this.parameterGroupBox.TabStop = false;
             this.parameterGroupBox.Text = "Parameter Setup";
             // 
             // cellHitsTextBox
             // 
-            this.cellHitsTextBox.Location = new System.Drawing.Point(107, 144);
+            this.cellHitsTextBox.Location = new System.Drawing.Point(107, 101);
             this.cellHitsTextBox.Name = "cellHitsTextBox";
             this.cellHitsTextBox.Size = new System.Drawing.Size(44, 20);
             this.cellHitsTextBox.TabIndex = 11;
@@ -417,7 +378,7 @@
             // cellHitsLabel
             // 
             this.cellHitsLabel.AutoSize = true;
-            this.cellHitsLabel.Location = new System.Drawing.Point(6, 147);
+            this.cellHitsLabel.Location = new System.Drawing.Point(6, 104);
             this.cellHitsLabel.Name = "cellHitsLabel";
             this.cellHitsLabel.Size = new System.Drawing.Size(94, 13);
             this.cellHitsLabel.TabIndex = 10;
@@ -426,15 +387,15 @@
             // functionTextBox
             // 
             this.functionTextBox.Enabled = false;
-            this.functionTextBox.Location = new System.Drawing.Point(82, 117);
+            this.functionTextBox.Location = new System.Drawing.Point(81, 75);
             this.functionTextBox.Name = "functionTextBox";
-            this.functionTextBox.Size = new System.Drawing.Size(267, 20);
+            this.functionTextBox.Size = new System.Drawing.Size(161, 20);
             this.functionTextBox.TabIndex = 9;
             this.functionTextBox.Text = "Not Implemented";
             // 
             // numOfDecimalsTextBox
             // 
-            this.numOfDecimalsTextBox.Location = new System.Drawing.Point(82, 77);
+            this.numOfDecimalsTextBox.Location = new System.Drawing.Point(82, 49);
             this.numOfDecimalsTextBox.Name = "numOfDecimalsTextBox";
             this.numOfDecimalsTextBox.Size = new System.Drawing.Size(37, 20);
             this.numOfDecimalsTextBox.TabIndex = 7;
@@ -445,13 +406,11 @@
             this.rowAxisGroupBox.Controls.Add(this.valueInfoLabel2);
             this.rowAxisGroupBox.Controls.Add(this.rowAxisValuesTextBox);
             this.rowAxisGroupBox.Controls.Add(this.valuesLabel2);
-            this.rowAxisGroupBox.Controls.Add(this.rowAxisUnitsTextBox);
-            this.rowAxisGroupBox.Controls.Add(this.unitsLabel3);
             this.rowAxisGroupBox.Controls.Add(this.parameterLabel3);
             this.rowAxisGroupBox.Controls.Add(this.rowAxisParameterComboBox);
-            this.rowAxisGroupBox.Location = new System.Drawing.Point(12, 462);
+            this.rowAxisGroupBox.Location = new System.Drawing.Point(12, 378);
             this.rowAxisGroupBox.Name = "rowAxisGroupBox";
-            this.rowAxisGroupBox.Size = new System.Drawing.Size(616, 115);
+            this.rowAxisGroupBox.Size = new System.Drawing.Size(616, 80);
             this.rowAxisGroupBox.TabIndex = 25;
             this.rowAxisGroupBox.TabStop = false;
             this.rowAxisGroupBox.Text = "Row Axis";
@@ -459,7 +418,7 @@
             // valueInfoLabel2
             // 
             this.valueInfoLabel2.AutoSize = true;
-            this.valueInfoLabel2.Location = new System.Drawing.Point(300, 52);
+            this.valueInfoLabel2.Location = new System.Drawing.Point(300, 25);
             this.valueInfoLabel2.Name = "valueInfoLabel2";
             this.valueInfoLabel2.Size = new System.Drawing.Size(230, 13);
             this.valueInfoLabel2.TabIndex = 9;
@@ -467,9 +426,9 @@
             // 
             // rowAxisValuesTextBox
             // 
-            this.rowAxisValuesTextBox.Location = new System.Drawing.Point(82, 76);
+            this.rowAxisValuesTextBox.Location = new System.Drawing.Point(82, 49);
             this.rowAxisValuesTextBox.Name = "rowAxisValuesTextBox";
-            this.rowAxisValuesTextBox.Size = new System.Drawing.Size(487, 20);
+            this.rowAxisValuesTextBox.Size = new System.Drawing.Size(512, 20);
             this.rowAxisValuesTextBox.TabIndex = 8;
             this.rowAxisValuesTextBox.Text = "0.08,0.12,0.16,0.2,0.24,0.28,0.32,0.36,0.4,0.44,0.48,0.52,0.56,0.6,0.64,0.68,0.72" +
     ",0.76,0.8,0.84,0.88,0.92,0.96,1,1.04,1.08,1.12,1.16,1.2";
@@ -477,27 +436,11 @@
             // valuesLabel2
             // 
             this.valuesLabel2.AutoSize = true;
-            this.valuesLabel2.Location = new System.Drawing.Point(6, 79);
+            this.valuesLabel2.Location = new System.Drawing.Point(6, 52);
             this.valuesLabel2.Name = "valuesLabel2";
             this.valuesLabel2.Size = new System.Drawing.Size(42, 13);
             this.valuesLabel2.TabIndex = 7;
             this.valuesLabel2.Text = "Values:";
-            // 
-            // rowAxisUnitsTextBox
-            // 
-            this.rowAxisUnitsTextBox.Location = new System.Drawing.Point(82, 49);
-            this.rowAxisUnitsTextBox.Name = "rowAxisUnitsTextBox";
-            this.rowAxisUnitsTextBox.Size = new System.Drawing.Size(160, 20);
-            this.rowAxisUnitsTextBox.TabIndex = 6;
-            // 
-            // unitsLabel3
-            // 
-            this.unitsLabel3.AutoSize = true;
-            this.unitsLabel3.Location = new System.Drawing.Point(6, 52);
-            this.unitsLabel3.Name = "unitsLabel3";
-            this.unitsLabel3.Size = new System.Drawing.Size(34, 13);
-            this.unitsLabel3.TabIndex = 5;
-            this.unitsLabel3.Text = "Units:";
             // 
             // parameterLabel3
             // 
@@ -519,7 +462,7 @@
             // 
             // oKButton
             // 
-            this.oKButton.Location = new System.Drawing.Point(579, 38);
+            this.oKButton.Location = new System.Drawing.Point(531, 496);
             this.oKButton.Name = "oKButton";
             this.oKButton.Size = new System.Drawing.Size(75, 23);
             this.oKButton.TabIndex = 26;
@@ -527,18 +470,60 @@
             this.oKButton.UseVisualStyleBackColor = true;
             this.oKButton.Click += new System.EventHandler(this.oKButton_Click);
             // 
+            // presetsComboBox
+            // 
+            this.presetsComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.presetsComboBox.FormattingEnabled = true;
+            this.presetsComboBox.Location = new System.Drawing.Point(372, 38);
+            this.presetsComboBox.Name = "presetsComboBox";
+            this.presetsComboBox.Size = new System.Drawing.Size(266, 21);
+            this.presetsComboBox.TabIndex = 27;
+            // 
+            // presetsLabel
+            // 
+            this.presetsLabel.AutoSize = true;
+            this.presetsLabel.Location = new System.Drawing.Point(312, 41);
+            this.presetsLabel.Name = "presetsLabel";
+            this.presetsLabel.Size = new System.Drawing.Size(40, 13);
+            this.presetsLabel.TabIndex = 28;
+            this.presetsLabel.Text = "Preset:";
+            // 
+            // savePresetButton
+            // 
+            this.savePresetButton.Location = new System.Drawing.Point(315, 146);
+            this.savePresetButton.Name = "savePresetButton";
+            this.savePresetButton.Size = new System.Drawing.Size(127, 23);
+            this.savePresetButton.TabIndex = 29;
+            this.savePresetButton.Text = "Save to presets list";
+            this.savePresetButton.UseVisualStyleBackColor = true;
+            this.savePresetButton.Click += new System.EventHandler(this.savePresetButton_Click);
+            // 
+            // deletePresetButton
+            // 
+            this.deletePresetButton.Location = new System.Drawing.Point(556, 146);
+            this.deletePresetButton.Name = "deletePresetButton";
+            this.deletePresetButton.Size = new System.Drawing.Size(82, 23);
+            this.deletePresetButton.TabIndex = 30;
+            this.deletePresetButton.Text = "Delete Preset";
+            this.deletePresetButton.UseVisualStyleBackColor = true;
+            this.deletePresetButton.Click += new System.EventHandler(this.deletePresetButton_Click);
+            // 
             // SetupHistogram
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(878, 693);
+            this.ClientSize = new System.Drawing.Size(650, 533);
+            this.Controls.Add(this.deletePresetButton);
+            this.Controls.Add(this.savePresetButton);
+            this.Controls.Add(this.presetsLabel);
+            this.Controls.Add(this.presetsComboBox);
             this.Controls.Add(this.oKButton);
             this.Controls.Add(this.rowAxisGroupBox);
             this.Controls.Add(this.columnAxisGroupBox);
             this.Controls.Add(this.parameterGroupBox);
             this.Controls.Add(this.shadingGroupBox);
-            this.Controls.Add(this.labelTextBox);
-            this.Controls.Add(this.labelLabel);
+            this.Controls.Add(this.namelTextBox);
+            this.Controls.Add(this.nameLabel);
             this.Name = "SetupHistogram";
             this.Text = "SetupHistogram";
             this.columnAxisGroupBox.ResumeLayout(false);
@@ -558,12 +543,10 @@
 
         private System.Windows.Forms.ColorDialog highValueColorDialog;
         private System.Windows.Forms.ColorDialog lowValueColorDialog;
-        private System.Windows.Forms.Label labelLabel;
-        private System.Windows.Forms.TextBox labelTextBox;
+        private System.Windows.Forms.Label nameLabel;
+        private System.Windows.Forms.TextBox namelTextBox;
         private System.Windows.Forms.ComboBox columnAxisParameterComboBox;
         private System.Windows.Forms.Label parameterLabel2;
-        private System.Windows.Forms.Label unitsLabel2;
-        private System.Windows.Forms.TextBox columnAxisUnitsTextBox;
         private System.Windows.Forms.GroupBox columnAxisGroupBox;
         private System.Windows.Forms.TextBox midValueTextBox;
         private System.Windows.Forms.TextBox lowValueTextBox;
@@ -581,10 +564,8 @@
         private System.Windows.Forms.Label decimalsLabel;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label functionLabel;
-        private System.Windows.Forms.ComboBox unitsComboBox;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.ComboBox parameterComboBox;
-        private System.Windows.Forms.Label unitsLabel1;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label parameterLabel1;
         private System.Windows.Forms.GroupBox parameterGroupBox;
@@ -597,12 +578,14 @@
         private System.Windows.Forms.Label valueInfoLabel2;
         private System.Windows.Forms.TextBox rowAxisValuesTextBox;
         private System.Windows.Forms.Label valuesLabel2;
-        private System.Windows.Forms.TextBox rowAxisUnitsTextBox;
-        private System.Windows.Forms.Label unitsLabel3;
         private System.Windows.Forms.Label parameterLabel3;
         private System.Windows.Forms.ComboBox rowAxisParameterComboBox;
         private System.Windows.Forms.Button oKButton;
         private System.Windows.Forms.Label cellHitsLabel;
         private System.Windows.Forms.TextBox cellHitsTextBox;
+        private System.Windows.Forms.ComboBox presetsComboBox;
+        private System.Windows.Forms.Label presetsLabel;
+        private System.Windows.Forms.Button savePresetButton;
+        private System.Windows.Forms.Button deletePresetButton;
     }
 }

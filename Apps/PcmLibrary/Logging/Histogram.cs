@@ -8,14 +8,14 @@ namespace PcmHacking
 {
     public class Histogram
     {
-        public float[] columnHeader; //eg RPM
-        public float[] rowHeader; //   eg MAP
+        public float[] columnHeader { get; set; } //eg RPM
+        public float[] rowHeader { get; set; } //   eg MAP
         private int decimalPlaces; //rounding for averging values
         private int cellHits; //how many times a cell needs a value before it is populated
         //public int[,] tableDisplayed; //x,y,value //meaning the data that is shown on the gridview
         //public BindingList<HistogramRow[]> tableDisplayed = new BindingList<HistogramRow[]>();
         public DataTable displayedValues = new DataTable("CurrentTableValues");
-        public int[] lastChangedCellLocation;
+        public int[] lastChangedCellLocation { get; private set; }
         private DataColumn column;
         private DataRow row;
         private List<float[]> oneDimensionLogData = new List<float[]>(); //float[col, parameter]
