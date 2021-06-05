@@ -156,8 +156,6 @@
             this.columnAxisValuesTextBox.Name = "columnAxisValuesTextBox";
             this.columnAxisValuesTextBox.Size = new System.Drawing.Size(512, 20);
             this.columnAxisValuesTextBox.TabIndex = 8;
-            this.columnAxisValuesTextBox.Text = "400,600,800,1000,1200,1400,1600,1800,2000,2200,2400,2800,3200,3600,4000,4400,4800" +
-    ",5200,5600,6000,6400,6800,7200,7600,8000";
             // 
             // valuesLabel1
             // 
@@ -430,8 +428,6 @@
             this.rowAxisValuesTextBox.Name = "rowAxisValuesTextBox";
             this.rowAxisValuesTextBox.Size = new System.Drawing.Size(512, 20);
             this.rowAxisValuesTextBox.TabIndex = 8;
-            this.rowAxisValuesTextBox.Text = "0.08,0.12,0.16,0.2,0.24,0.28,0.32,0.36,0.4,0.44,0.48,0.52,0.56,0.6,0.64,0.68,0.72" +
-    ",0.76,0.8,0.84,0.88,0.92,0.96,1,1.04,1.08,1.12,1.16,1.2";
             // 
             // valuesLabel2
             // 
@@ -478,6 +474,7 @@
             this.presetsComboBox.Name = "presetsComboBox";
             this.presetsComboBox.Size = new System.Drawing.Size(266, 21);
             this.presetsComboBox.TabIndex = 27;
+            this.presetsComboBox.SelectionChangeCommitted += new System.EventHandler(this.presetsComboBox_SelectionChangeCommitted);
             // 
             // presetsLabel
             // 

@@ -26,7 +26,7 @@ namespace PcmHacking
         private List<string> colParameters;
         private List<string> rowParameters;
         private HistogramProfile[] histogramProfiles;
-        private List<string> histogramProfilesNames;
+        private List<string> histogramProfilesNames = new List<string> { };
         //private List<string> histogramProfilesNames;
         private readonly string profileXMLPath = ((System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetEntryAssembly().Location).ToString()) + "\\histogramProfiles.xml");
 
@@ -38,7 +38,7 @@ namespace PcmHacking
             rowParameters = avaliableParameters.ToList();
             rowParameters.Add(""); //make sure a blank one is avaliable for the row
             histogramProfiles = HistogramProfileReaderWriter.readHistogramProfiles(profileXMLPath).ToArray();
-            List<string> histogramProfilesNames = new List<string>(); ;
+            histogramProfilesNames.Add("");
             foreach (HistogramProfile profile in histogramProfiles)
             {
                 histogramProfilesNames.Add(profile.Name);
@@ -161,7 +161,6 @@ namespace PcmHacking
                 lowValue = 0;
             }
 
-
             this.DialogResult = DialogResult.OK;
             this.Close();
         }
@@ -175,7 +174,7 @@ namespace PcmHacking
             string columnHeaders = columnAxisValuesTextBox.Text;
             string decimalPoints = numOfDecimalsTextBox.Text;
             string cellHits = cellHitsTextBox.Text;
-            string rowHeaders;
+            string rowHeaders = rowAxisValuesTextBox.Text;
             if (String.IsNullOrEmpty(rowParameter))
             {
                 rowHeaders = "";
@@ -183,7 +182,7 @@ namespace PcmHacking
             else {
                 rowHeaders = rowAxisValuesTextBox.Text;
             }
-            HistogramProfile profile = new HistogramProfile(
+            HistogramProfile newprofile = new HistogramProfile(
                 Name,
                 columnHeaders,
                 rowHeaders,
@@ -192,12 +191,50 @@ namespace PcmHacking
                 parameter,
                 cellHits,
                 decimalPoints);
-            HistogramProfileReaderWriter.writeHistogramProfile(profile, profileXMLPath);
+            HistogramProfileReaderWriter.writeHistogramProfile(newprofile, profileXMLPath);
+
+            histogramProfilesNames.Clear();
+            histogramProfiles = HistogramProfileReaderWriter.readHistogramProfiles(profileXMLPath).ToArray();
+            foreach (HistogramProfile profile in histogramProfiles)
+            {
+                histogramProfilesNames.Add(profile.Name);
+            }
+            presetsComboBox.DataSource = null;
+            presetsComboBox.DataSource = this.histogramProfilesNames;
         }
 
         private void deletePresetButton_Click(object sender, EventArgs e)
         {
+            string presetName = presetsComboBox.GetItemText(presetsComboBox.SelectedItem);
+            HistogramProfileReaderWriter.deleteHistogramProfile(presetName, profileXMLPath);
 
+            histogramProfilesNames.Clear();
+            histogramProfiles = HistogramProfileReaderWriter.readHistogramProfiles(profileXMLPath).ToArray();
+            foreach (HistogramProfile profile in histogramProfiles)
+            {
+                histogramProfilesNames.Add(profile.Name);
+            }
+            presetsComboBox.DataSource = null;
+            presetsComboBox.DataSource = this.histogramProfilesNames;
+        }
+
+        private void presetsComboBox_SelectionChangeCommitted(object sender, EventArgs e)
+        {
+            string presetName = presetsComboBox.GetItemText(presetsComboBox.SelectedItem);
+
+            for (int i = 0; i < histogramProfiles.Length; i++)
+            {
+                if (String.Equals(histogramProfiles[i].Name, presetName))
+                {   
+                    columnAxisValuesTextBox.Text = histogramProfiles[i].columnHeaders;
+                    rowAxisValuesTextBox.Text = histogramProfiles[i].rowHeaders;
+                    numOfDecimalsTextBox.Text = histogramProfiles[i].decimalPoints;
+                    cellHitsTextBox.Text = histogramProfiles[i].cellHits;
+                    parameterComboBox.SelectedIndex = parameterComboBox.FindStringExact(histogramProfiles[i].parameter);
+                    columnAxisParameterComboBox.SelectedIndex = columnAxisParameterComboBox.FindStringExact(histogramProfiles[i].columnParameter);
+                    rowAxisParameterComboBox.SelectedIndex = rowAxisParameterComboBox.FindStringExact(histogramProfiles[i].rowParameter);
+                }
+            }
         }
     }
 }

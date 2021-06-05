@@ -9,8 +9,7 @@ namespace PcmHacking
 {
     public class HistogramProfileReaderWriter
     {
-        //private List<HistogramProfile> histogramProfiles;
-        public static void writeHistogramProfile(HistogramProfile profile, string path)
+        public static void createInitialProfile(string path) //make blank one if needed
         {
             XmlWriterSettings settings = new XmlWriterSettings();
             settings.Indent = true;
@@ -28,19 +27,51 @@ namespace PcmHacking
                 XElement presets = new XElement("HistogramPresets");
                 top.Add(presets);
 
+                //XElement element = new XElement("Preset");
+                //
+                //element.SetAttributeValue("Name", profile.Name);
+                //element.SetAttributeValue("ColumnHeaders", profile.columnHeaders);
+                //element.SetAttributeValue("RowHeaders", profile.rowHeaders);
+                //element.SetAttributeValue("ColumnParameter", profile.columnParameter);
+                //element.SetAttributeValue("RowParameter", profile.rowParameter);
+                //element.SetAttributeValue("Parameter", profile.parameter);
+                //element.SetAttributeValue("CellHits", profile.cellHits);
+                //element.SetAttributeValue("DecimalPoints", profile.decimalPoints);
+                //
+                //presets.Add(element);
+
+                document.Save(writer);
+            }
+            }
+            public static void writeHistogramProfile(HistogramProfile profile, string path)
+        {
+            try
+            {
+                XDocument xml = XDocument.Load(path);
+            }
+            catch
+            {
+                createInitialProfile(path);
+            }
+            finally
+            {
+                XDocument xml = XDocument.Load(path);
+
+                XElement presets = xml.Root.Element("HistogramPresets");
+
                 XElement element = new XElement("Preset");
                 element.SetAttributeValue("Name", profile.Name);
                 element.SetAttributeValue("ColumnHeaders", profile.columnHeaders);
                 element.SetAttributeValue("RowHeaders", profile.rowHeaders);
-                element.SetAttributeValue("ColumnParameter", profile.columnHeaders);
+                element.SetAttributeValue("ColumnParameter", profile.columnParameter);
                 element.SetAttributeValue("RowParameter", profile.rowParameter);
                 element.SetAttributeValue("Parameter", profile.parameter);
                 element.SetAttributeValue("CellHits", profile.cellHits);
                 element.SetAttributeValue("DecimalPoints", profile.decimalPoints);
-                     
+
                 presets.Add(element);
 
-                document.Save(writer);
+                xml.Save(path);
             }
         }
         public static List<HistogramProfile> readHistogramProfiles(string path)
@@ -59,8 +90,8 @@ namespace PcmHacking
                         HistogramProfile profile = new HistogramProfile(
                             parameterElement.Attribute("Name").Value,
                             parameterElement.Attribute("ColumnHeaders").Value,
-                            parameterElement.Attribute("ColumnParameter").Value,
                             parameterElement.Attribute("RowHeaders").Value,
+                            parameterElement.Attribute("ColumnParameter").Value,
                             parameterElement.Attribute("RowParameter").Value,
                             parameterElement.Attribute("Parameter").Value,
                             parameterElement.Attribute("CellHits").Value,
@@ -74,6 +105,19 @@ namespace PcmHacking
             catch { }
             return histogramProfiles;
         }
+        public static void deleteHistogramProfile(string presetName, string path)
+        {
+            XDocument doc = XDocument.Load(path);
+            var q = from node in doc.Descendants("Preset")
+                    let attr = node.Attribute("Name")
+                    where attr != null && attr.Value == presetName
+                    select node;
+            q.ToList().ForEach(x => x.Remove());
+
+            doc.Save(path);
+
+        } 
+
     }
 }
 
